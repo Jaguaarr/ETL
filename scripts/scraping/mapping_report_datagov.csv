@@ -1,0 +1,7 @@
+target_column,status,source_column
+region,NON_RESOLUE,
+province,OK_MATCH_FLOU,Province
+commune,OK_MATCH_FLOU,Commune
+nom_etablissement,OK_MATCH_FLOU,Nom Etab
+milieu,NON_RESOLUE,
+type_etablissement,OK_MATCH_FLOU,Categorie

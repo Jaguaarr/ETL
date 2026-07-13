@@ -1,0 +1,51 @@
+# bkam_config.yaml
+# -----------------
+# Configuration des sources a scraper sur le site officiel de Bank Al-Maghrib
+# (bkam.ma). Deux jeux de donnees retenus (priorite validee avec le PO :
+# "les deux") :
+#
+#   1. cours_reference : cours de change de reference quotidiens (taux
+#      "Moyen" par devise face au dirham). La page bkam.ma n'affiche que
+#      les derniers jours ouvres disponibles -> scraping INCREMENTAL
+#      (upsert sur devise_code + date_cours), CONTRAIREMENT au full-load
+#      HCP. Il faut donc lancer ce scraper regulierement (ex: cron
+#      quotidien) pour constituer un historique.
+#
+#   2. taux_directeur : historique complet des decisions de politique
+#      monetaire (taux directeur, ratio de reserve obligatoire,
+#      remuneration de la reserve) depuis 2006. La page publie un
+#      snapshot COMPLET a chaque run -> full-load (TRUNCATE + INSERT),
+#      comme HCP.
+#
+# Bank Al-Maghrib ne publie pas de fichier telechargeable stable pour ces
+# deux jeux de donnees (contrairement au HCP) : on scrape directement le
+# tableau HTML de la page (voir bkam_parser.py), de facon generique pour
+# rester robuste aux changements de mise en page.
+
+datasets:
+
+  cours_reference:
+    description: >
+      Cours de reference quotidiens des devises cotees par Bank Al-Maghrib
+      face au dirham marocain (taux "Moyen"), source officielle BAM.
+    page_url: "https://www.bkam.ma/Marches/Principaux-indicateurs/Marche-des-changes/Cours-de-change/Cours-de-reference"
+    table_marker: "Devises"
+    load_strategy: "incremental"   # upsert sur (devise_code, date_cours)
+    output_filename: "bkam_cours_reference.csv"
+
+  taux_directeur:
+    description: >
+      Historique des decisions de politique monetaire de Bank Al-Maghrib
+      (taux directeur, ratio de reserve obligatoire, remuneration de la
+      reserve), depuis 2006.
+    page_url: "https://www.bkam.ma/Politique-monetaire/Cadre-strategique/Decision-de-la-politique-monetaire/Historique-des-decisions"
+    table_marker: "Date"
+    load_strategy: "full"          # TRUNCATE + INSERT a chaque run
+    output_filename: "bkam_taux_directeur.csv"
+
+http:
+  user_agent: "ETL-HCP-Pipeline/1.0 (+contact: <votre-email>; usage interne de collecte de donnees publiques)"
+  timeout_seconds: 30
+  max_retries: 3
+  backoff_seconds: 5
+  delay_between_requests_seconds: 2

@@ -1,0 +1,46 @@
+# osm_config.yaml
+# -----------------
+# Configuration du scraping des Points d'Intérêt (POIs) OpenStreetMap, via
+# l'API Overpass, GRANULARITÉ COMMUNE (cf. cadrage projet : "par commune,
+# presque tous les POIs, dans les différentes catégories").
+#
+# Catégories retenues (clés de tag OSM "top-level" standard, cf.
+# https://wiki.openstreetmap.org/wiki/Map_features) : c'est ce sous-
+# ensemble qui couvre la quasi-totalité des POIs (commerces, services,
+# santé, éducation, tourisme, loisirs, cultes, administration...), à
+# l'exclusion volontaire de tags non-POI (routes `highway=*`, empreintes
+# de bâtiments `building=*` seules) qui exploseraient le volume sans valeur
+# ajoutée "point d'intérêt".
+categories:
+  amenity: "*"      # écoles, hôpitaux, restaurants, banques, lieux de culte, administration...
+  shop: "*"         # commerces
+  tourism: "*"       # hébergements, attractions
+  leisure: "*"       # sport, loisirs, parcs
+  healthcare: "*"    # établissements de santé (complète le tag amenity=hospital/clinic)
+  office: "*"        # bureaux (services, ONG, entreprises)
+  craft: "*"         # artisanat
+  historic: "*"      # patrimoine historique
+
+# Overpass est un service public à usage équitable ("fair use") : un seul
+# point d'accès n'est pas garanti disponible en permanence -> plusieurs
+# miroirs, avec bascule automatique en cas d'erreur/quota.
+overpass_endpoints:
+  - "https://overpass-api.de/api/interpreter"
+  - "https://overpass.kumi.systems/api/interpreter"
+  - "https://overpass.openstreetmap.ru/api/interpreter"
+
+http:
+  user_agent: "ETL-HCP-Pipeline/1.0 (+contact: <votre-email>; usage interne de collecte de donnees publiques ; respect Overpass fair-use policy)"
+  timeout_seconds: 180
+  max_retries: 3
+  backoff_seconds: 10
+  delay_between_communes_seconds: 2   # throttling volontaire (fair-use Overpass)
+
+# Référence géographique des communes à parcourir (même fichier que celui
+# utilisé par 01_build_hcp_data.py : produit une fois par
+# extract_geo_reference.py, versionné dans le repo).
+communes_reference: "../../datasets/hcp/reference/communes_geo_reference.csv"
+
+output:
+  pois_filename: "osm_pois.csv"
+  unmatched_communes_filename: "osm_communes_non_geocodees.csv"

@@ -1,0 +1,251 @@
+/*
+===============================================================================
+Monitoring Layer - DDL
+===============================================================================
+Objectif :
+    - Tracer chaque run ETL (bronze/silver/gold) : debut, fin, statut, volumetrie.
+    - Centraliser les resultats de controles qualite (completude, unicite,
+      coherence referentielle) au-dela de la simple quarantaine silver.
+    - Fournir une vue de reconciliation des volumes entre les 3 couches.
+
+Ordre d'execution : A LANCER APRES bronze/silver/gold (dans ce sens : bronze,
+silver, gold, monitoring), car monitoring.vw_row_counts reference les tables
+des 3 couches et echouerait si elles n'existent pas encore.
+
+Consequence sur le tout premier deploiement (base vierge) :
+    Les appels a monitoring.log_etl_start()/log_etl_end() dans bronze/silver/
+    gold sont proteges par IF to_regclass('monitoring.etl_log') IS NOT NULL,
+    donc ils ne font simplement rien tant que ce script n'a pas encore ete
+    joue une premiere fois. A partir du deploiement suivant, tous les runs
+    bronze/silver/gold sont journalises normalement.
+===============================================================================
+*/
+
+CREATE SCHEMA IF NOT EXISTS monitoring;
+
+-- -----------------------------------------------------------------------------
+-- Journal des executions ETL
+-- -----------------------------------------------------------------------------
+DROP TABLE IF EXISTS monitoring.etl_log CASCADE;
+CREATE TABLE monitoring.etl_log (
+    log_id          bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    batch_id        uuid        NOT NULL,
+    layer           text        NOT NULL,   -- bronze / silver / gold
+    table_name      text        NOT NULL,
+    status          text        NOT NULL DEFAULT 'RUNNING',  -- RUNNING / SUCCESS / FAILED
+    rows_affected   bigint,
+    message         text,
+    started_at      timestamptz NOT NULL DEFAULT now(),
+    ended_at        timestamptz,
+    duration_ms     numeric GENERATED ALWAYS AS (
+                        EXTRACT(EPOCH FROM (ended_at - started_at)) * 1000
+                    ) STORED
+);
+CREATE INDEX idx_etl_log_layer_table_started
+    ON monitoring.etl_log (layer, table_name, started_at DESC);
+
+COMMENT ON TABLE monitoring.etl_log IS
+    'Un enregistrement par execution de script bronze/silver/gold. '
+    'Alimente par monitoring.log_etl_start() / log_etl_end().';
+
+-- -----------------------------------------------------------------------------
+-- Fonctions de logging, appelees depuis les scripts de load/transform
+-- -----------------------------------------------------------------------------
+CREATE OR REPLACE FUNCTION monitoring.log_etl_start(
+    p_layer      text,
+    p_table_name text,
+    p_batch_id   uuid
+) RETURNS bigint
+LANGUAGE sql
+AS $$
+    INSERT INTO monitoring.etl_log (batch_id, layer, table_name, status)
+    VALUES (p_batch_id, p_layer, p_table_name, 'RUNNING')
+    RETURNING log_id;
+$$;
+
+CREATE OR REPLACE FUNCTION monitoring.log_etl_end(
+    p_layer        text,
+    p_table_name   text,
+    p_rows         bigint,
+    p_status       text,
+    p_message      text
+) RETURNS void
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    UPDATE monitoring.etl_log
+    SET ended_at      = now(),
+        rows_affected = p_rows,
+        status        = p_status,
+        message       = p_message
+    WHERE log_id = (
+        SELECT log_id
+        FROM monitoring.etl_log
+        WHERE layer = p_layer
+          AND table_name = p_table_name
+          AND status = 'RUNNING'
+        ORDER BY started_at DESC
+        LIMIT 1
+    );
+END;
+$$;
+
+COMMENT ON FUNCTION monitoring.log_etl_start(text, text, uuid) IS
+    'A appeler en debut de script (bronze/silver/gold). Retourne le log_id.';
+COMMENT ON FUNCTION monitoring.log_etl_end(text, text, bigint, text, text) IS
+    'A appeler en fin de script pour cloturer le dernier run RUNNING '
+    'correspondant a (layer, table_name).';
+
+-- -----------------------------------------------------------------------------
+-- Journal des controles qualite (au-dela de la quarantaine silver)
+-- -----------------------------------------------------------------------------
+DROP TABLE IF EXISTS monitoring.data_quality_log CASCADE;
+CREATE TABLE monitoring.data_quality_log (
+    check_id        bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    check_name      text        NOT NULL,
+    layer           text        NOT NULL,
+    table_name      text        NOT NULL,
+    column_name     text,
+    check_type      text        NOT NULL,   -- completeness / uniqueness / range / referential
+    records_checked bigint,
+    records_failed  bigint      NOT NULL,
+    status          text        NOT NULL,   -- PASS / WARN / FAIL
+    checked_at      timestamptz NOT NULL DEFAULT now()
+);
+
+COMMENT ON TABLE monitoring.data_quality_log IS
+    'Historique des controles qualite executes par monitoring.run_quality_checks().';
+
+-- -----------------------------------------------------------------------------
+-- Fonction de controles qualite automatiques (a lancer apres le run gold)
+-- -----------------------------------------------------------------------------
+CREATE OR REPLACE FUNCTION monitoring.run_quality_checks()
+RETURNS void
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    v_total          bigint;
+    v_failed         bigint;
+BEGIN
+    -- 1. Completude : code_commune ne doit jamais etre NULL en silver
+    SELECT count(*) INTO v_total FROM silver.communes_hcp;
+    SELECT count(*) INTO v_failed FROM silver.communes_hcp WHERE code_commune IS NULL;
+    INSERT INTO monitoring.data_quality_log
+        (check_name, layer, table_name, column_name, check_type, records_checked, records_failed, status)
+    VALUES
+        ('code_commune_not_null', 'silver', 'communes_hcp', 'code_commune', 'completeness',
+         v_total, v_failed, CASE WHEN v_failed = 0 THEN 'PASS' ELSE 'FAIL' END);
+
+    -- 2. Unicite : un seul commune_id par code_commune en gold
+    SELECT count(*) INTO v_total FROM gold.dim_commune;
+    SELECT count(*) INTO v_failed
+    FROM (
+        SELECT code_commune FROM gold.dim_commune
+        GROUP BY code_commune HAVING count(*) > 1
+    ) dup;
+    INSERT INTO monitoring.data_quality_log
+        (check_name, layer, table_name, column_name, check_type, records_checked, records_failed, status)
+    VALUES
+        ('code_commune_unique', 'gold', 'dim_commune', 'code_commune', 'uniqueness',
+         v_total, v_failed, CASE WHEN v_failed = 0 THEN 'PASS' ELSE 'FAIL' END);
+
+    -- 3. Plausibilite : les colonnes pct_* doivent rester dans [0, 100]
+    SELECT count(*) INTO v_total FROM gold.fact_education;
+    SELECT count(*) INTO v_failed
+    FROM gold.fact_education
+    WHERE taux_analphabetisme  NOT BETWEEN 0 AND 100
+       OR taux_scolarisation_7_12_ans NOT BETWEEN 0 AND 100;
+    INSERT INTO monitoring.data_quality_log
+        (check_name, layer, table_name, column_name, check_type, records_checked, records_failed, status)
+    VALUES
+        ('taux_education_range_0_100', 'gold', 'fact_education', 'taux_*', 'range',
+         v_total, v_failed, CASE WHEN v_failed = 0 THEN 'PASS' WHEN v_failed < v_total * 0.01 THEN 'WARN' ELSE 'FAIL' END);
+
+    -- 4. Coherence referentielle : toute commune gold doit avoir ses 4 facts
+    SELECT count(*) INTO v_total FROM gold.dim_commune;
+    SELECT count(*) INTO v_failed
+    FROM gold.dim_commune c
+    WHERE NOT EXISTS (SELECT 1 FROM gold.fact_demographie d WHERE d.commune_id = c.commune_id)
+       OR NOT EXISTS (SELECT 1 FROM gold.fact_education e   WHERE e.commune_id = c.commune_id)
+       OR NOT EXISTS (SELECT 1 FROM gold.fact_emploi m      WHERE m.commune_id = c.commune_id)
+       OR NOT EXISTS (SELECT 1 FROM gold.fact_logement l    WHERE l.commune_id = c.commune_id);
+    INSERT INTO monitoring.data_quality_log
+        (check_name, layer, table_name, column_name, check_type, records_checked, records_failed, status)
+    VALUES
+        ('dim_commune_has_all_facts', 'gold', 'dim_commune', NULL, 'referential',
+         v_total, v_failed, CASE WHEN v_failed = 0 THEN 'PASS' ELSE 'FAIL' END);
+END;
+$$;
+
+COMMENT ON FUNCTION monitoring.run_quality_checks() IS
+    'Lance une batterie de controles qualite basiques et journalise le resultat '
+    'dans monitoring.data_quality_log. A appeler apres 02_transform_gold.sql.';
+
+-- -----------------------------------------------------------------------------
+-- Journal des runs de SCRAPING (referme par 00_scrape_hcp.py, 02_scrape_bkam.py,
+-- 03_scrape_data_gov.py --log-to-db) : jusqu'ici referencee par le code
+-- Python mais jamais creee (le logging DB echouait silencieusement, cf.
+-- try/except des scripts) -> corrige ici.
+-- -----------------------------------------------------------------------------
+DROP TABLE IF EXISTS monitoring.scraping_log CASCADE;
+CREATE TABLE monitoring.scraping_log (
+    log_id            bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    dataset_key       text        NOT NULL,
+    source_url        text,
+    file_name         text,
+    file_sha256       text,
+    file_size_bytes   bigint,
+    http_status       integer,
+    status            text        NOT NULL,   -- NEW / UNCHANGED / ERROR
+    error_message     text,
+    scraped_at        timestamptz NOT NULL DEFAULT now()
+);
+CREATE INDEX idx_scraping_log_dataset_scraped
+    ON monitoring.scraping_log (dataset_key, scraped_at DESC);
+
+COMMENT ON TABLE monitoring.scraping_log IS
+    'Un enregistrement par run de scraper (HCP/BKAM/data.gov), quand '
+    'lance avec --log-to-db. Complementaire aux fichiers scraping_runs.jsonl '
+    'locaux a chaque source dans datasets/<source>/raw/.';
+
+-- -----------------------------------------------------------------------------
+-- Vue de reconciliation des volumes entre couches
+-- -----------------------------------------------------------------------------
+CREATE OR REPLACE VIEW monitoring.vw_row_counts AS
+SELECT 'bronze' AS layer, 'communes_hcp' AS table_name, count(*) AS row_count FROM bronze.communes_hcp
+UNION ALL
+SELECT 'silver', 'communes_hcp', count(*) FROM silver.communes_hcp
+UNION ALL
+SELECT 'silver', 'communes_hcp_rejects', count(*) FROM silver.communes_hcp_rejects
+UNION ALL
+SELECT 'gold', 'dim_commune', count(*) FROM gold.dim_commune
+UNION ALL
+SELECT 'bronze', 'bkam_cours_reference', count(*) FROM bronze.bkam_cours_reference
+UNION ALL
+SELECT 'silver', 'bkam_cours_reference', count(*) FROM silver.bkam_cours_reference
+UNION ALL
+SELECT 'silver', 'bkam_cours_reference_rejects', count(*) FROM silver.bkam_cours_reference_rejects
+UNION ALL
+SELECT 'bronze', 'bkam_taux_directeur', count(*) FROM bronze.bkam_taux_directeur
+UNION ALL
+SELECT 'silver', 'bkam_taux_directeur', count(*) FROM silver.bkam_taux_directeur
+UNION ALL
+SELECT 'silver', 'bkam_taux_directeur_rejects', count(*) FROM silver.bkam_taux_directeur_rejects
+UNION ALL
+SELECT 'bronze', 'datagov_centres_sante', count(*) FROM bronze.datagov_centres_sante
+UNION ALL
+SELECT 'silver', 'datagov_centres_sante', count(*) FROM silver.datagov_centres_sante
+UNION ALL
+SELECT 'silver', 'datagov_centres_sante_rejects', count(*) FROM silver.datagov_centres_sante_rejects
+UNION ALL
+SELECT 'bronze', 'osm_pois', count(*) FROM bronze.osm_pois
+UNION ALL
+SELECT 'bronze', 'osm_communes_non_geocodees', count(*) FROM bronze.osm_communes_non_geocodees
+UNION ALL
+SELECT 'silver', 'osm_pois', count(*) FROM silver.osm_pois
+UNION ALL
+SELECT 'silver', 'osm_pois_rejects', count(*) FROM silver.osm_pois_rejects;
+
+COMMENT ON VIEW monitoring.vw_row_counts IS
+    'Reconciliation rapide des volumes bronze -> silver (+ rejets) -> gold, '
+    'pour toutes les sources (HCP, Bank Al-Maghrib, data.gov.ma, OSM).';
