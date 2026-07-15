@@ -1,0 +1,12 @@
+{
+  "dataset_key": "adjudications_devises",
+  "source_url": "https://www.bkam.ma/Marches/Principaux-indicateurs/Marche-des-changes/Resultats-des-adjudications-en-devises",
+  "file_name": "adjudications_devises_20260714T121551Z.html",
+  "file_sha256": "dab9473bf32692d4f6051f406c83f7ce078b2e6cac958e6ebf828def8f7b35df",
+  "file_size_bytes": 387521,
+  "http_status": 200,
+  "status": "UNCHANGED",
+  "n_rows": 1,
+  "error_message": null,
+  "scraped_at": "2026-07-14T12:15:51.011244+00:00"
+}

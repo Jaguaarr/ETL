@@ -1,0 +1,12 @@
+{
+  "dataset_key": "cours_reference",
+  "source_url": "https://www.bkam.ma/Marches/Principaux-indicateurs/Marche-des-changes/Cours-de-change/Cours-de-reference",
+  "file_name": "cours_reference_20260714T121536Z.html",
+  "file_sha256": "53a7117dac5caf7d42c7bdd5a64de1ed1655837e0665655096a53231d587edd7",
+  "file_size_bytes": 445587,
+  "http_status": 200,
+  "status": "UNCHANGED",
+  "n_rows": 60,
+  "error_message": null,
+  "scraped_at": "2026-07-14T12:15:35.947362+00:00"
+}

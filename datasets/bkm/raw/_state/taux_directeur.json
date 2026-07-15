@@ -1,0 +1,12 @@
+{
+  "dataset_key": "taux_directeur",
+  "source_url": "https://www.bkam.ma/Politique-monetaire/Cadre-strategique/Decision-de-la-politique-monetaire/Historique-des-decisions",
+  "file_name": "taux_directeur_20260714T121539Z.html",
+  "file_sha256": "8b30cc8c8697185950481d170876b27af2f6adb9c57d62824f8e4b20c19242db",
+  "file_size_bytes": 410747,
+  "http_status": 200,
+  "status": "UNCHANGED",
+  "n_rows": 77,
+  "error_message": null,
+  "scraped_at": "2026-07-14T12:15:38.510099+00:00"
+}

@@ -1,0 +1,12 @@
+{
+  "dataset_key": "monia",
+  "source_url": "https://www.bkam.ma/Marches/Principaux-indicateurs/Marche-monetaire/Indice-monia-moroccan-overnight-index-average",
+  "file_name": "monia_20260714T121544Z.html",
+  "file_sha256": "1fbb241d586436832aad300f89791926713836e48cf207ee7b6ba204cc15ce80",
+  "file_size_bytes": 395693,
+  "http_status": 200,
+  "status": "UNCHANGED",
+  "n_rows": 10,
+  "error_message": null,
+  "scraped_at": "2026-07-14T12:15:43.490811+00:00"
+}

@@ -1,0 +1,12 @@
+{
+  "dataset_key": "taux_interbancaire",
+  "source_url": "https://www.bkam.ma/Marches/Principaux-indicateurs/Marche-monetaire/Taux-de-reference-du-marche-interbancaire",
+  "file_name": "taux_interbancaire_20260714T121541Z.html",
+  "file_sha256": "54154f19e558fba5da5f02466543f2020b7104ac8fddc481c7af63412645c94c",
+  "file_size_bytes": 389535,
+  "http_status": 200,
+  "status": "UNCHANGED",
+  "n_rows": 5,
+  "error_message": null,
+  "scraped_at": "2026-07-14T12:15:41.062048+00:00"
+}

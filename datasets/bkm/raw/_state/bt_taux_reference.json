@@ -1,0 +1,12 @@
+{
+  "dataset_key": "bt_taux_reference",
+  "source_url": "https://www.bkam.ma/Marches/Principaux-indicateurs/Marche-obligataire/Marche-des-bons-de-tresor/Marche-secondaire/Taux-de-reference-des-bons-du-tresor",
+  "file_name": "bt_taux_reference_20260714T121548Z.html",
+  "file_sha256": "d21741e01efa7ae29b69bd8ed985e5ff4d091d5005a3201f082d14fff24dc501",
+  "file_size_bytes": 397579,
+  "http_status": 200,
+  "status": "UNCHANGED",
+  "n_rows": 11,
+  "error_message": null,
+  "scraped_at": "2026-07-14T12:15:48.473613+00:00"
+}

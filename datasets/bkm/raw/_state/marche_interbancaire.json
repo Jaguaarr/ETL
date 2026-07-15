@@ -1,0 +1,12 @@
+{
+  "dataset_key": "marche_interbancaire",
+  "source_url": "https://www.bkam.ma/Marches/Principaux-indicateurs/Marche-monetaire/Marche-monetaire-interbancaire",
+  "file_name": "marche_interbancaire_20260714T121546Z.html",
+  "file_sha256": "598a853e94e32d2d1c7d4c5303ebfa3a2f6f5fae18c90d0c7fb5e94dd6d1e3cb",
+  "file_size_bytes": 395699,
+  "http_status": 200,
+  "status": "UNCHANGED",
+  "n_rows": 10,
+  "error_message": null,
+  "scraped_at": "2026-07-14T12:15:46.062344+00:00"
+}
