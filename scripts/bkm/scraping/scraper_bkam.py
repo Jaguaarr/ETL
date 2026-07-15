@@ -759,7 +759,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--output",
-        default="datasets/bkm/bank_almaghreb_data.csv",
+        default="../../../datasets/bkm/bank_almaghreb_data.csv",
         help="Output CSV or JSON file path.",
     )
     parser.add_argument(

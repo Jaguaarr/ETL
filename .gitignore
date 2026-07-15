@@ -1,0 +1,22 @@
+# Secrets
+.env
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Donnees scrapees (regenerees par les scripts scraping/*) -- on garde
+# uniquement le referentiel geo canonique (reference/) qui sert de source
+# partagee a OSM et Google Maps.
+datasets/hcp/raw/
+datasets/hcp/*.csv
+datasets/bkm/*.csv
+datasets/bkm/raw/
+datasets/osm/*.geojson
+datasets/osm/*.csv
+datasets/osm/raw/
+datasets/gglmaps/*.csv
+datasets/gglmaps/raw/
+# datasets/hcp/reference/*.csv (geo_reference.csv) reste versionne : c'est
+# la source canonique partagee par HCP/OSM/Google Maps.

@@ -20,7 +20,7 @@ DECLARE
     v_batch_id uuid := gen_random_uuid();
 BEGIN
     IF to_regclass('monitoring.etl_log') IS NOT NULL THEN
-        PERFORM monitoring.log_etl_start('silver', 'osm_pois', v_batch_id);
+        PERFORM monitoring.log_etl_start('osm', 'silver', 'osm_pois', v_batch_id);
     END IF;
 END $$;
 
@@ -79,7 +79,7 @@ BEGIN
     SELECT count(*) INTO v_rows_ok FROM silver.osm_pois;
     SELECT count(*) INTO v_rows_rej FROM silver.osm_pois_rejects;
     IF to_regclass('monitoring.etl_log') IS NOT NULL THEN
-        PERFORM monitoring.log_etl_end('silver', 'osm_pois', v_rows_ok, 'SUCCESS',
+        PERFORM monitoring.log_etl_end('osm', 'silver', 'osm_pois', v_rows_ok, 'SUCCESS',
             format('%s ligne(s) rejetee(s) en quarantaine', v_rows_rej));
     END IF;
     RAISE NOTICE 'silver.osm_pois : % lignes valides / % rejetee(s)', v_rows_ok, v_rows_rej;

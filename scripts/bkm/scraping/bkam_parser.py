@@ -41,6 +41,11 @@ LEADING_QTY_RE = re.compile(r"^\s*([\d\s]+)\s+(.+)$")
 def _norm(text: str) -> str:
     n = unicodedata.normalize("NFKD", text or "")
     n = "".join(c for c in n if not unicodedata.combining(c))
+    # Apostrophe typographique (') vs dactylographique (') : bkam.ma utilise
+    # les deux selon les pages -- non affecte par la normalisation NFKD
+    # (ce ne sont pas des caracteres combinants), donc unifie explicitement
+    # pour que table_marker n'ait pas besoin de deviner la bonne variante.
+    n = n.replace("’", "'")
     return re.sub(r"\s+", " ", n).strip().lower()
 
 
@@ -148,6 +153,27 @@ def parse_cours_reference(html: str, page_url: str) -> list[CoursReferenceRow]:
                     cours_moyen=value_text,
                 )
             )
+    return out
+
+
+def parse_generic_table(html: str, marker: str) -> list[dict]:
+    """Parse GENERIQUE (sans logique metier specifique a un tableau donne) :
+    utilise les libelles de la ligne d'en-tete comme cles de dict. Pour tout
+    nouveau dataset bkam_config.yaml qui n'a pas (encore) de parseur dedie
+    (parse_cours_reference / parse_historique_decisions), cf. section
+    "Etendre a d'autres jeux de donnees BAM" du README de cette source."""
+    rows = find_table_by_marker(html, marker)
+    if len(rows) < 2:
+        raise ValueError(f"Table trouvee (marqueur {marker!r}) mais vide (pas de lignes de donnees).")
+
+    headers = [_cell_text(c) or f"col_{i}" for i, c in enumerate(rows[0])]
+    out: list[dict] = []
+    for tr_cells in rows[1:]:
+        cells = [_cell_text(c) for c in tr_cells]
+        if not any(cells):
+            continue
+        cells = (cells + [""] * len(headers))[: len(headers)]
+        out.append(dict(zip(headers, cells)))
     return out
 
 

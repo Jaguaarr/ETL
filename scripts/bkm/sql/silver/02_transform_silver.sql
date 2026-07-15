@@ -22,8 +22,8 @@ DECLARE
     v_batch_id uuid := gen_random_uuid();
 BEGIN
     IF to_regclass('monitoring.etl_log') IS NOT NULL THEN
-        PERFORM monitoring.log_etl_start('silver', 'bkam_cours_reference', v_batch_id);
-        PERFORM monitoring.log_etl_start('silver', 'bkam_taux_directeur', v_batch_id);
+        PERFORM monitoring.log_etl_start('bkm', 'silver', 'bkam_cours_reference', v_batch_id);
+        PERFORM monitoring.log_etl_start('bkm', 'silver', 'bkam_taux_directeur', v_batch_id);
     END IF;
 END $$;
 
@@ -52,7 +52,7 @@ INSERT INTO silver.bkam_cours_reference (devise_code, devise_libelle, unite, dat
 SELECT
     btrim(b.devise_code),
     btrim(b.devise_libelle),
-    COALESCE(silver.to_int(b.unite), 1),
+    COALESCE(NULLIF(regexp_replace(b.unite, '[^0-9]', '', 'g'), '')::int, 1),
     silver.to_date_fr(b.date_cours),
     silver.to_double_fr(b.cours_moyen),
     b._batch_id
@@ -114,9 +114,9 @@ BEGIN
     SELECT count(*) INTO v_rows_taux_rej FROM silver.bkam_taux_directeur_rejects;
 
     IF to_regclass('monitoring.etl_log') IS NOT NULL THEN
-        PERFORM monitoring.log_etl_end('silver', 'bkam_cours_reference', v_rows_cours, 'SUCCESS',
+        PERFORM monitoring.log_etl_end('bkm', 'silver', 'bkam_cours_reference', v_rows_cours, 'SUCCESS',
             format('%s ligne(s) rejetee(s) sur ce batch', v_rows_cours_rej));
-        PERFORM monitoring.log_etl_end('silver', 'bkam_taux_directeur', v_rows_taux, 'SUCCESS',
+        PERFORM monitoring.log_etl_end('bkm', 'silver', 'bkam_taux_directeur', v_rows_taux, 'SUCCESS',
             format('%s ligne(s) rejetee(s)', v_rows_taux_rej));
     END IF;
 

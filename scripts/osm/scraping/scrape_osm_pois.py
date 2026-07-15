@@ -4,22 +4,26 @@
 ------------------------
 Scrape les POIs OpenStreetMap (Overpass API) GRANULARITÉ COMMUNE, toutes
 catégories confondues (cf. osm_config.yaml), pour la liste des communes de
-la référence géographique HCP (datasets/hcp/reference/
-communes_geo_reference.csv).
+la référence géographique HCP (datasets/hcp/reference/geo_reference.csv).
 
-Conçu pour être RÉSUMABLE (--resume) : ~1500 communes x plusieurs
-catégories représente un volume de requêtes important vis-à-vis de la
-politique de "fair use" d'Overpass (throttling volontaire, cf.
-delay_between_communes_seconds) ; un run complet peut nécessiter plusieurs
-sessions. Un fichier d'état (raw/_state/osm_progress.json) trace les
-communes déjà traitées pour ce run et permet de reprendre sans tout
-rescraper.
+Conçu pour être RÉSUMABLE (--resume) : ~1500 communes représente un volume
+de requêtes important vis-à-vis de la politique de "fair use" d'Overpass
+(throttling volontaire, cf. delay_between_communes_seconds) ; un run
+complet peut nécessiter plusieurs sessions. Un fichier d'état
+(raw/_state/osm_progress.json) trace les communes déjà traitées pour ce
+run et permet de reprendre sans tout rescraper. **1 seule requête Overpass
+par commune** (cf. osm_overpass.build_combined_query) — pas 2 — pour
+limiter la pression sur l'API.
 
 Gestion des homonymies : une commune est identifiée dans OSM par son NOM
-(pas d'identifiant HCP<->OSM stable connu). Si 0 ou 2+ relations
-administratives admin_level=8 portent ce nom au Maroc, la commune est mise
-en QUARANTAINE (datasets/osm/osm_communes_non_geocodees.csv) avec le motif,
-plutôt que d'agréger des POIs à la mauvaise commune.
+(pas d'identifiant HCP<->OSM stable connu), matché par PRÉFIXE insensible
+à la casse (les noms OSM marocains concatènent souvent plusieurs écritures
+sur un seul tag) sur les relations administratives `admin_level` 6 à 10
+(le découpage RGPH inclut des arrondissements urbains et communes rurales
+qui ne sont pas tous tagués exactement 8 côté OSM). Si 0 ou 2+ relations
+correspondent, la commune est mise en QUARANTAINE
+(datasets/osm/osm_communes_non_geocodees.csv) avec le motif, plutôt que
+d'agréger des POIs à la mauvaise commune.
 
 Usage
 -----
@@ -36,26 +40,41 @@ import csv
 import json
 import sys
 import time
+import unicodedata
 from datetime import datetime, timezone
 from pathlib import Path
 
 import yaml
+from shapely.geometry import MultiPolygon, Polygon, shape
 
-from osm_overpass import build_commune_query, count_matching_areas, query_overpass
+from osm_overpass import query_overpass
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 CONFIG_PATH = SCRIPT_DIR / "osm_config.yaml"
 
-DATASETS_DIR = SCRIPT_DIR.parent.parent / "datasets" / "osm"
+DATASETS_DIR = SCRIPT_DIR.parent.parent.parent / "datasets" / "osm"
 RAW_DIR = DATASETS_DIR / "raw"
 STATE_DIR = RAW_DIR / "_state"
 PROGRESS_FILE = STATE_DIR / "osm_progress.json"
+COMMUNES_GEOJSON = DATASETS_DIR / "admin_boundaries_communes.geojson"
 
 POIS_COLUMNS = [
     "commune_code", "commune_nom", "code_province", "osm_id", "osm_type",
     "category_key", "category_value", "poi_name", "lat", "lon", "tags_json",
 ]
 UNMATCHED_COLUMNS = ["commune_code", "commune_nom", "code_province", "n_areas_found", "reason"]
+
+
+def normalize_name(name: str) -> str:
+    """Normalise un nom pour le matching : minuscules, sans accents, sans tirets."""
+    name = name.strip().lower()
+    # Supprimer les accents
+    name = unicodedata.normalize("NFKD", name).encode("ASCII", "ignore").decode("ascii")
+    # Remplacer les tirets par des espaces
+    name = name.replace("-", " ")
+    # Supprimer les espaces multiples
+    name = " ".join(name.split())
+    return name
 
 
 def load_config() -> dict:
@@ -68,12 +87,37 @@ def load_communes(cfg: dict) -> list[dict]:
     if not ref_path.exists():
         print(f"[ERROR] reference geo introuvable : {ref_path}", file=sys.stderr)
         print(
-            "        -> voir extract_geo_reference.py (deja execute une fois, cf. README_scraping.md)",
+            "        -> lancer scripts/hcp/scraping/scrape_geo_reference.py d'abord "
+            "(source canonique partagee par HCP/OSM/Google Maps).",
             file=sys.stderr,
         )
         sys.exit(1)
     with open(ref_path, newline="", encoding="utf-8") as f:
-        return list(csv.DictReader(f))
+        rows = [r for r in csv.DictReader(f) if r.get("niveau") == "commune"]
+    # Normalise vers les noms de colonnes historiques de ce script pour
+    # limiter le diff (Code_Commune/Nom_Commune/Code_Province) plutot que de
+    # renommer tout le fichier.
+    return [
+        {
+            "Code_Commune": r["code_commune"],
+            "Nom_Commune": r["nom"],
+            "Code_Province": r["code_province"],
+        }
+        for r in rows
+    ]
+
+
+def load_communes_geometry() -> dict:
+    """Charge les polygones des communes depuis le GeoJSON."""
+    with open(COMMUNES_GEOJSON, encoding="utf-8") as f:
+        geo = json.load(f)
+
+    geometries = {}
+    for feat in geo["features"]:
+        name = normalize_name(feat["properties"]["NAME_4"])
+        geometries[name] = shape(feat["geometry"])
+
+    return geometries
 
 
 def load_progress() -> set[str]:
@@ -100,7 +144,57 @@ def pick_category(tags: dict, category_keys: list[str]) -> tuple[str, str]:
     return "", ""
 
 
-def scrape_commune(commune: dict, cfg: dict) -> tuple[list[dict], dict | None]:
+def get_polygon_coords(polygon, simplify_tolerance: float = 0.0005) -> list[str]:
+    """
+    Extrait les coordonnées d'un polygone en les simplifiant.
+    Gère les MultiPolygon en prenant le plus grand.
+    """
+    # Simplifier le polygone pour éviter les timeouts
+    polygon = polygon.simplify(simplify_tolerance, preserve_topology=True)
+
+    # Gérer les MultiPolygon : prendre le plus grand
+    if isinstance(polygon, MultiPolygon):
+        polygon = max(polygon.geoms, key=lambda p: p.area)
+
+    # Extraire les coordonnées avec une précision raisonnable
+    coords = []
+    for lon, lat in polygon.exterior.coords:
+        coords.append(f"{lat:.7f} {lon:.7f}")
+    return coords
+
+
+def build_polygon_query(polygon, categories: dict, timeout: int) -> str:
+    """Construit une requête Overpass avec polygone et filtres par catégorie."""
+    coords = get_polygon_coords(polygon)
+    poly = " ".join(coords)
+
+    # Construire les filtres par catégorie
+    filters = []
+    for key, value in categories.items():
+        if value == "*":
+            # Récupérer tous les éléments avec cette clé
+            filters.append(f'node["{key}"](poly:"{poly}");')
+            filters.append(f'way["{key}"](poly:"{poly}");')
+            filters.append(f'relation["{key}"](poly:"{poly}");')
+        else:
+            # Récupérer les éléments avec une valeur spécifique
+            filters.append(f'node["{key}"="{value}"](poly:"{poly}");')
+            filters.append(f'way["{key}"="{value}"](poly:"{poly}");')
+            filters.append(f'relation["{key}"="{value}"](poly:"{poly}");')
+
+    query = f"""
+[out:json][timeout:{timeout}];
+
+(
+  {" ".join(filters)}
+);
+
+out center tags;
+"""
+    return query
+
+
+def scrape_commune(commune: dict, cfg: dict, communes_geom: dict) -> tuple[list[dict], dict | None]:
     """Retourne (rows_pois, unmatched_row_or_None)."""
     code = commune.get("Code_Commune", "").strip()
     name = commune.get("Nom_Commune", "").strip()
@@ -112,23 +206,34 @@ def scrape_commune(commune: dict, cfg: dict) -> tuple[list[dict], dict | None]:
             "n_areas_found": 0, "reason": "nom_commune_vide_dans_reference",
         }
 
+    # Vérifier que la commune existe dans le GeoJSON
+    normalized_name = normalize_name(name)
+    polygon = communes_geom.get(normalized_name)
+    if polygon is None:
+        return [], {
+            "commune_code": code,
+            "commune_nom": name,
+            "code_province": province,
+            "n_areas_found": 0,
+            "reason": "commune_absente_du_geojson",
+        }
+
     endpoints = cfg["overpass_endpoints"]
     http_cfg = cfg["http"]
 
-    n_areas = count_matching_areas(name, http_cfg, endpoints)
-    if n_areas != 1:
-        reason = "aucune_relation_admin_level_8_trouvee" if n_areas == 0 else "nom_ambigu_plusieurs_relations"
-        return [], {
-            "commune_code": code, "commune_nom": name, "code_province": province,
-            "n_areas_found": n_areas, "reason": reason,
-        }
+    # Construire la requête avec le polygone et les catégories
+    query = build_polygon_query(
+        polygon,
+        cfg["categories"],
+        http_cfg["timeout_seconds"]
+    )
 
-    query = build_commune_query(name, cfg["categories"], timeout_s=http_cfg["timeout_seconds"])
     result = query_overpass(query, endpoints, http_cfg)
+    poi_elements = result.get("elements", [])
 
     category_keys = list(cfg["categories"].keys())
     rows = []
-    for el in result.get("elements", []):
+    for el in poi_elements:
         tags = el.get("tags", {}) or {}
         cat_key, cat_value = pick_category(tags, category_keys)
         if el.get("type") == "node":
@@ -164,6 +269,7 @@ def main() -> int:
         parser.error("fournir --all ou --commune-code")
 
     cfg = load_config()
+    communes_geom = load_communes_geometry()
     communes = load_communes(cfg)
 
     if args.commune_code:
@@ -189,7 +295,7 @@ def main() -> int:
     n_errors = 0
 
     with open(pois_path, pois_mode, newline="", encoding="utf-8") as pois_f, \
-         open(unmatched_path, unmatched_mode, newline="", encoding="utf-8") as unmatched_f:
+            open(unmatched_path, unmatched_mode, newline="", encoding="utf-8") as unmatched_f:
 
         pois_writer = csv.DictWriter(pois_f, fieldnames=POIS_COLUMNS)
         if pois_mode == "w":
@@ -204,7 +310,7 @@ def main() -> int:
                 continue
 
             try:
-                rows, unmatched = scrape_commune(commune, cfg)
+                rows, unmatched = scrape_commune(commune, cfg, communes_geom)
                 if unmatched:
                     unmatched_writer.writerow(unmatched)
                     unmatched_f.flush()

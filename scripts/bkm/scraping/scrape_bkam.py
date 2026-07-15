@@ -39,12 +39,12 @@ from pathlib import Path
 import requests
 import yaml
 
-from bkam_parser import parse_cours_reference, parse_historique_decisions
+from bkam_parser import parse_cours_reference, parse_historique_decisions, parse_generic_table
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 CONFIG_PATH = SCRIPT_DIR / "bkam_config.yaml"
 
-DATASETS_DIR = SCRIPT_DIR.parent.parent / "datasets" / "bkam"
+DATASETS_DIR = SCRIPT_DIR.parent.parent.parent / "datasets" / "bkm"
 RAW_DIR = DATASETS_DIR / "raw"
 STATE_DIR = RAW_DIR / "_state"
 
@@ -153,12 +153,14 @@ def log_to_db(result: ScrapeResult) -> None:
         print(f"[INFO] logging DB ignore (monitoring.scraping_log indisponible ?) : {exc}", file=sys.stderr)
 
 
-def parse_rows(dataset_key: str, html: str, page_url: str) -> list[dict]:
+def parse_rows(dataset_key: str, html: str, page_url: str, ds_cfg: dict) -> list[dict]:
     if dataset_key == "cours_reference":
         return [asdict(r) for r in parse_cours_reference(html, page_url)]
     if dataset_key == "taux_directeur":
         return [asdict(r) for r in parse_historique_decisions(html)]
-    raise ValueError(f"dataset_key inconnu : {dataset_key}")
+    # Tout nouveau dataset ajoute a bkam_config.yaml sans parseur dedie
+    # retombe sur le parseur generique (cf. bkam_parser.parse_generic_table).
+    return parse_generic_table(html, ds_cfg["table_marker"])
 
 
 def scrape_dataset(dataset_key: str, cfg: dict, force: bool, log_to_db_flag: bool) -> ScrapeResult:
@@ -178,14 +180,16 @@ def scrape_dataset(dataset_key: str, cfg: dict, force: bool, log_to_db_flag: boo
         raw_filename = f"{dataset_key}_{timestamp}.html"
         (RAW_DIR / raw_filename).write_bytes(content_bytes)
 
-        rows = parse_rows(dataset_key, html, ds_cfg["page_url"])
+        rows = parse_rows(dataset_key, html, ds_cfg["page_url"], ds_cfg)
         if not rows:
             raise ValueError(f"0 ligne extraite pour {dataset_key} : la page a peut-etre change de structure.")
 
         if status == "NEW" or force:
             DATASETS_DIR.mkdir(parents=True, exist_ok=True)
             out_path = DATASETS_DIR / ds_cfg["output_filename"]
-            columns = CSV_COLUMNS[dataset_key]
+            # Datasets sans parseur dedie (cf. parse_rows) : colonnes derivees
+            # dynamiquement de l'en-tete HTML plutot que d'un CSV_COLUMNS figé.
+            columns = CSV_COLUMNS.get(dataset_key) or list(rows[0].keys())
             with open(out_path, "w", newline="", encoding="utf-8") as f:
                 w = csv.DictWriter(f, fieldnames=columns)
                 w.writeheader()
@@ -233,7 +237,7 @@ def scrape_dataset(dataset_key: str, cfg: dict, force: bool, log_to_db_flag: boo
 def main() -> int:
     parser = argparse.ArgumentParser(description="Scraper officiel des jeux de donnees Bank Al-Maghrib")
     group = parser.add_mutually_exclusive_group(required=True)
-    group.add_argument("--dataset", choices=list(CSV_COLUMNS.keys()), help="cle du dataset dans bkam_config.yaml")
+    group.add_argument("--dataset", help="cle du dataset dans bkam_config.yaml")
     group.add_argument("--all", action="store_true", help="scraper tous les datasets de bkam_config.yaml")
     parser.add_argument("--force", action="store_true", help="forcer la regeneration du csv meme si le hash est inchange")
     parser.add_argument("--log-to-db", action="store_true", help="journaliser aussi dans monitoring.scraping_log")

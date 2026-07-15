@@ -12,13 +12,34 @@ mais on ne fait jamais confiance aveuglement a une source externe).
 CREATE SCHEMA IF NOT EXISTS silver;
 CREATE EXTENSION IF NOT EXISTS postgis;
 
+-- Casts "essai" (jamais d'exception sur donnee sale -> NULL), reutilisees
+-- par 02_transform_silver.sql pour typer osm_id/lat/lon sans faire planter
+-- tout le batch sur une seule valeur invalide.
+CREATE OR REPLACE FUNCTION silver.to_int(p_val text)
+RETURNS bigint LANGUAGE plpgsql IMMUTABLE AS $$
+BEGIN
+    RETURN NULLIF(btrim(p_val), '')::bigint;
+EXCEPTION WHEN OTHERS THEN
+    RETURN NULL;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION silver.to_double(p_val text)
+RETURNS double precision LANGUAGE plpgsql IMMUTABLE AS $$
+BEGIN
+    RETURN NULLIF(btrim(p_val), '')::double precision;
+EXCEPTION WHEN OTHERS THEN
+    RETURN NULL;
+END;
+$$;
+
 DROP TABLE IF EXISTS silver.osm_pois CASCADE;
 
 CREATE TABLE silver.osm_pois (
     poi_id            bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    commune_code      varchar(13),
+    commune_code      text,
     commune_nom       text        NOT NULL,
-    code_province     varchar(7),
+    code_province     text,
     osm_id            bigint      NOT NULL,
     osm_type          varchar(10) NOT NULL,
     category_key      text        NOT NULL,

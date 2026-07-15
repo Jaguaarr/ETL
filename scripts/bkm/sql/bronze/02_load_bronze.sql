@@ -20,8 +20,8 @@ BEGIN;
 DO $$
 BEGIN
     IF to_regclass('monitoring.etl_log') IS NOT NULL THEN
-        PERFORM monitoring.log_etl_start('bronze', 'bkam_cours_reference', gen_random_uuid());
-        PERFORM monitoring.log_etl_start('bronze', 'bkam_taux_directeur', gen_random_uuid());
+        PERFORM monitoring.log_etl_start('bkm', 'bronze', 'bkam_cours_reference', gen_random_uuid());
+        PERFORM monitoring.log_etl_start('bkm', 'bronze', 'bkam_taux_directeur', gen_random_uuid());
     END IF;
 END $$;
 
@@ -37,11 +37,9 @@ CREATE TEMP TABLE _stg_bkam_cours_reference (
     cours_moyen     text
 );
 
-\if :{?bkam_cours_csv}
-\else
-\set bkam_cours_csv 'datasets/bkam/bkam_cours_reference.csv'
-\endif
-\copy _stg_bkam_cours_reference FROM :'bkam_cours_csv' WITH (FORMAT csv, HEADER, DELIMITER ',', NULL '', ENCODING 'UTF8');
+-- NB: chemin en dur (pas de variable :'var') -- \copy n'interpole pas
+-- fiablement les variables psql dans l'argument FROM sur toutes les versions.
+\copy _stg_bkam_cours_reference FROM 'datasets/bkm/bkam_cours_reference.csv' WITH (FORMAT csv, HEADER, DELIMITER ',', NULL '', ENCODING 'UTF8');
 
 INSERT INTO bronze.bkam_cours_reference (devise_code, devise_libelle, unite, date_cours, cours_moyen, _batch_id)
 SELECT devise_code, devise_libelle, unite, date_cours, cours_moyen, gen_random_uuid()
@@ -67,11 +65,7 @@ CREATE TEMP TABLE _stg_bkam_taux_directeur (
     remuneration_reserve          text
 );
 
-\if :{?bkam_taux_csv}
-\else
-\set bkam_taux_csv 'datasets/bkam/bkam_taux_directeur.csv'
-\endif
-\copy _stg_bkam_taux_directeur FROM :'bkam_taux_csv' WITH (FORMAT csv, HEADER, DELIMITER ',', NULL '', ENCODING 'UTF8');
+\copy _stg_bkam_taux_directeur FROM 'datasets/bkm/bkam_taux_directeur.csv' WITH (FORMAT csv, HEADER, DELIMITER ',', NULL '', ENCODING 'UTF8');
 
 TRUNCATE TABLE bronze.bkam_taux_directeur;
 
@@ -92,8 +86,8 @@ BEGIN
     SELECT count(*) INTO v_rows_cours FROM bronze.bkam_cours_reference;
     SELECT count(*) INTO v_rows_taux  FROM bronze.bkam_taux_directeur;
     IF to_regclass('monitoring.etl_log') IS NOT NULL THEN
-        PERFORM monitoring.log_etl_end('bronze', 'bkam_cours_reference', v_rows_cours, 'SUCCESS', NULL);
-        PERFORM monitoring.log_etl_end('bronze', 'bkam_taux_directeur', v_rows_taux, 'SUCCESS', NULL);
+        PERFORM monitoring.log_etl_end('bkm', 'bronze', 'bkam_cours_reference', v_rows_cours, 'SUCCESS', NULL);
+        PERFORM monitoring.log_etl_end('bkm', 'bronze', 'bkam_taux_directeur', v_rows_taux, 'SUCCESS', NULL);
     END IF;
     RAISE NOTICE 'bronze.bkam_cours_reference : % lignes (cumul historique)', v_rows_cours;
     RAISE NOTICE 'bronze.bkam_taux_directeur : % lignes', v_rows_taux;

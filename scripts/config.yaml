@@ -1,0 +1,23 @@
+# Configuration partagee par les 4 pipelines (hcp, bkm, osm, gglmaps).
+# Les secrets (mot de passe DB, cle API Google) ne sont JAMAIS ici : ils
+# viennent des variables d'environnement (.env, voir .env.example).
+
+database:
+  host_env: PGHOST
+  port_env: PGPORT
+  dbname_env: PGDATABASE
+  user_env: PGUSER
+  password_env: PGPASSWORD
+
+http:
+  # Identifie le scraper aupres des sites cibles, avec un contact valide -
+  # bonne pratique attendue par les administrateurs de service public
+  # (hcp.ma, bkam.ma) et par la politique de fair-use d'Overpass (OSM).
+  user_agent: "ETL-Maroc-Pipeline/2.0 (+contact: {SCRAPER_CONTACT_EMAIL}; usage academique/interne de collecte de donnees publiques)"
+  timeout_seconds: 60
+  max_retries: 4
+  backoff_seconds: 5
+
+srid: 4326  # WGS84, standard pour toutes les colonnes geom du projet
+
+pipeline_order: [osm, hcp, bkm, gglmaps]

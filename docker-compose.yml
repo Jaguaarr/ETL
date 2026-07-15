@@ -1,0 +1,25 @@
+services:
+  postgres:
+    build:
+      context: ./docker
+      dockerfile: postgres.Dockerfile
+    container_name: etl_maroc_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${PGDATABASE:-etl_maroc}
+      POSTGRES_USER: ${PGUSER:-postgres}
+      POSTGRES_PASSWORD: ${PGPASSWORD:-alhamdolilah}
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./docker/init-postgis.sql:/docker-entrypoint-initdb.d/00-postgis.sql:ro
+      - .:/workspace:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${PGUSER:-postgres} -d ${PGDATABASE:-etl_maroc}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  pgdata:

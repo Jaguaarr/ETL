@@ -30,16 +30,16 @@ overpass_endpoints:
   - "https://overpass.openstreetmap.ru/api/interpreter"
 
 http:
-  user_agent: "ETL-HCP-Pipeline/1.0 (+contact: <votre-email>; usage interne de collecte de donnees publiques ; respect Overpass fair-use policy)"
+  user_agent: "ETL-Maroc-Pipeline/2.0 (+contact: safae.haj@gmail.com; usage academique/interne de collecte de donnees publiques ; respect Overpass fair-use policy)"
   timeout_seconds: 180
   max_retries: 3
   backoff_seconds: 10
   delay_between_communes_seconds: 2   # throttling volontaire (fair-use Overpass)
 
-# Référence géographique des communes à parcourir (même fichier que celui
-# utilisé par 01_build_hcp_data.py : produit une fois par
-# extract_geo_reference.py, versionné dans le repo).
-communes_reference: "../../datasets/hcp/reference/communes_geo_reference.csv"
+# Référence géographique des communes à parcourir : source canonique
+# produite par scripts/hcp/scraping/scrape_geo_reference.py (arbre officiel
+# du dashboard RGPH 2024), partagée par HCP/OSM/Google Maps.
+communes_reference: "../../../datasets/hcp/reference/geo_reference.csv"
 
 output:
   pois_filename: "osm_pois.csv"

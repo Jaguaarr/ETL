@@ -20,7 +20,7 @@ BEGIN;
 DO $$
 BEGIN
     IF to_regclass('monitoring.etl_log') IS NOT NULL THEN
-        PERFORM monitoring.log_etl_start('bronze', 'osm_pois', gen_random_uuid());
+        PERFORM monitoring.log_etl_start('osm', 'bronze', 'osm_pois', gen_random_uuid());
     END IF;
 END $$;
 
@@ -40,11 +40,9 @@ CREATE TEMP TABLE _stg_osm_pois (
     tags_json        text
 );
 
-\if :{?osm_pois_csv}
-\else
-\set osm_pois_csv 'datasets/osm/osm_pois.csv'
-\endif
-\copy _stg_osm_pois FROM :'osm_pois_csv' WITH (FORMAT csv, HEADER, DELIMITER ',', NULL '', ENCODING 'UTF8');
+-- NB: chemin en dur (pas de variable :'var') -- \copy n'interpole pas
+-- fiablement les variables psql dans l'argument FROM sur toutes les versions.
+\copy _stg_osm_pois FROM 'datasets/osm/osm_pois.csv' WITH (FORMAT csv, HEADER, DELIMITER ',', NULL '', ENCODING 'UTF8');
 
 TRUNCATE TABLE bronze.osm_pois;
 
@@ -69,11 +67,7 @@ CREATE TEMP TABLE _stg_osm_communes_non_geocodees (
     reason           text
 );
 
-\if :{?osm_unmatched_csv}
-\else
-\set osm_unmatched_csv 'datasets/osm/osm_communes_non_geocodees.csv'
-\endif
-\copy _stg_osm_communes_non_geocodees FROM :'osm_unmatched_csv' WITH (FORMAT csv, HEADER, DELIMITER ',', NULL '', ENCODING 'UTF8');
+\copy _stg_osm_communes_non_geocodees FROM 'datasets/osm/osm_communes_non_geocodees.csv' WITH (FORMAT csv, HEADER, DELIMITER ',', NULL '', ENCODING 'UTF8');
 
 TRUNCATE TABLE bronze.osm_communes_non_geocodees;
 
@@ -91,7 +85,7 @@ BEGIN
     SELECT count(*) INTO v_rows_pois FROM bronze.osm_pois;
     SELECT count(*) INTO v_rows_unmatched FROM bronze.osm_communes_non_geocodees;
     IF to_regclass('monitoring.etl_log') IS NOT NULL THEN
-        PERFORM monitoring.log_etl_end('bronze', 'osm_pois', v_rows_pois, 'SUCCESS',
+        PERFORM monitoring.log_etl_end('osm', 'bronze', 'osm_pois', v_rows_pois, 'SUCCESS',
             format('%s commune(s) non geocodee(s)', v_rows_unmatched));
     END IF;
     RAISE NOTICE 'bronze.osm_pois : % lignes', v_rows_pois;
