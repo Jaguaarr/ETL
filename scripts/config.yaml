@@ -1,0 +1,19 @@
+# Configuration partagee par les 4 pipelines (hcp, bkm, osm, gglmaps).
+# Les secrets (mot de passe DB, cle API Google) ne sont JAMAIS ici : ils
+# viennent des variables d'environnement (.env, voir .env.example).
+#
+# NB : pas de bloc `http` partage ici (retire) -- chaque source possede son
+# propre *_config.yaml avec ses propres reglages HTTP (user-agent, retries,
+# delais), qui fait foi. Un bloc partage jamais lu par aucun scraper
+# pretait a confusion sur la configuration reellement appliquee.
+
+database:
+  host_env: PGHOST
+  port_env: PGPORT
+  dbname_env: PGDATABASE
+  user_env: PGUSER
+  password_env: PGPASSWORD
+
+srid: 4326  # WGS84, standard pour toutes les colonnes geom du projet
+
+pipeline_order: [osm, hcp, bkm, gglmaps]

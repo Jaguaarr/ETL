@@ -1,0 +1,20 @@
+requests>=2.31
+playwright>=1.44
+pandas>=2.2
+pyyaml>=6.0
+beautifulsoup4>=4.12
+lxml>=5.2
+psycopg2-binary>=2.9
+shapely>=2.0
+tqdm>=4.66
+python-dotenv>=1.0
+
+# BKM (scraper_bkam.py) : extraction de tableaux depuis les rapports PDF/XLSX
+pdfplumber>=0.11
+openpyxl>=3.1
+
+# Google Maps (scrape_places.py) : decodage des Plus Codes en lat/lon
+openlocationcode>=1.0.1
+
+# Generation du document Word final (livrable de documentation)
+python-docx>=1.1

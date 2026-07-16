@@ -1,0 +1,71 @@
+# osm_config.yaml
+# -----------------
+# Configuration du scraping des Points d'Interet (POIs) OpenStreetMap, via
+# l'API Overpass, GRANULARITE DE REQUETE PAR PROVINCE (~75 requetes),
+# reassignation commune faite localement (point-in-polygon, sans requete
+# Overpass supplementaire) -- cf. scripts/osm/scraping/overpass_batch.py
+# pour le detail. Remplace l'ancienne approche 1 requete/commune (~1500,
+# filtre `poly:` cout eleve cote serveur) qui etait le vrai goulot de
+# performance du pipeline.
+#
+# Categories retenues (clés de tag OSM "top-level" standard, cf.
+# https://wiki.openstreetmap.org/wiki/Map_features) : c'est ce sous-
+# ensemble qui couvre la quasi-totalité des POIs (commerces, services,
+# santé, éducation, tourisme, loisirs, cultes, administration...), à
+# l'exclusion volontaire de tags non-POI (routes `highway=*`, empreintes
+# de bâtiments `building=*` seules) qui exploseraient le volume sans valeur
+# ajoutée "point d'intérêt". Le réseau routier/ferroviaire est couvert
+# séparément par scrape_osm_mobility.py (cf. osm_mobility_config.yaml).
+categories:
+  amenity: "*"      # écoles, hôpitaux, restaurants, banques, lieux de culte, administration...
+  shop: "*"         # commerces
+  tourism: "*"       # hébergements, attractions
+  leisure: "*"       # sport, loisirs, parcs
+  healthcare: "*"    # établissements de santé (complète le tag amenity=hospital/clinic)
+  office: "*"        # bureaux (services, ONG, entreprises)
+  craft: "*"         # artisanat
+  historic: "*"      # patrimoine historique
+
+# Overpass est un service public à usage équitable ("fair use") : un seul
+# point d'accès n'est pas garanti disponible en permanence -> plusieurs
+# miroirs, avec bascule automatique en cas d'erreur/quota. Avec le
+# batching par province, la parallelisation (batch.max_workers) utilise
+# un miroir par requete concurrente en round-robin.
+overpass_endpoints:
+  - "https://overpass-api.de/api/interpreter"
+  - "https://overpass.kumi.systems/api/interpreter"
+  # overpass.openstreetmap.ru retire de la rotation : injoignable (timeout
+  # de connexion, pas un simple ralentissement) depuis cet environnement
+  # lors de l'execution reelle du pipeline -- chaque bascule vers ce miroir
+  # coutait jusqu'a 3 x 30s de timeout de connexion avant d'essayer le
+  # suivant, un cout pur sans aucun benefice. A reintegrer si sa
+  # disponibilite redevient normale (cf. https://overpass.openstreetmap.ru/api/status).
+
+http:
+  user_agent: "ETL-Maroc-Pipeline/2.0 (+contact: safae.haj@gmail.com; usage academique/interne de collecte de donnees publiques ; respect Overpass fair-use policy)"
+  timeout_seconds: 180
+  max_retries: 3
+  backoff_seconds: 10
+
+batch:
+  # Requetes Overpass concurrentes -- 1 par miroir disponible (cf.
+  # overpass_endpoints ci-dessus) pour rester dans l'esprit fair-use tout
+  # en parallelisant : jamais plus de max_workers requetes en vol a la fois,
+  # tous miroirs confondus.
+  max_workers: 3
+
+# Référence géographique des communes/provinces à parcourir : source
+# canonique produite par scripts/hcp/scraping/scrape_geo_reference.py
+# (arbre officiel du dashboard RGPH 2024), partagée par HCP/OSM/Google Maps.
+communes_reference: "../../../datasets/hcp/reference/geo_reference.csv"
+
+output:
+  pois_filename: "osm_pois.csv"
+  # Elements Overpass dont le point ne tombe dans AUCUN polygone communal
+  # connu (bord de polygone imprecis, ou commune sans polygone dans
+  # admin_boundaries_communes.geojson) -- journalises pour investigation,
+  # jamais rattaches au hasard. Granularite POI (pas commune) depuis le
+  # passage au batching par province : une commune entiere n'est plus
+  # "mise en quarantaine" globalement, seuls les points qui tombent
+  # reellement hors polygone le sont.
+  unassigned_filename: "osm_pois_non_assignes.csv"

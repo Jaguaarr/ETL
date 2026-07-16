@@ -1,0 +1,55 @@
+services:
+  postgres:
+    build:
+      context: ./docker
+      dockerfile: postgres.Dockerfile
+    container_name: etl_maroc
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${PGDATABASE:-etl_maroc}
+      POSTGRES_USER: ${PGUSER:-postgres}
+      POSTGRES_PASSWORD: ${PGPASSWORD:-alhamdolilah}
+    # Port hote volontairement inhabituel : deux services PostgreSQL natifs
+    # Windows (postgresql-x64-17, postgresql-x64-18) occupent deja 5432 ET
+    # 5433 sur cette machine, provoquant des connexions aleatoirement
+    # routees vers le mauvais serveur (erreurs d'authentification
+    # trompeuses) si ce conteneur reutilise l'un de ces ports.
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./docker/init-postgis.sql:/docker-entrypoint-initdb.d/00-postgis.sql:ro
+      - .:/workspace:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${PGUSER:-postgres} -d ${PGDATABASE:-etl_maroc}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # Temps de trajet routier (scripts/osm/scraping/scrape_travel_times.py).
+  # OPTIONNEL : profil dedie, ne demarre PAS avec `docker compose up` seul
+  # (necessite `docker compose --profile osrm up -d osrm`) -- telecharge un
+  # extrait national (~200 Mo) et le pretraite (~1-2 Go de donnees derivees,
+  # plusieurs minutes de CPU), pas necessaire pour le reste du pipeline.
+  # Donnees preparees au prealable par scripts/osm/scraping/prepare_osrm_data.sh
+  # (ou .ps1 sous Windows) dans le volume osrm_data ci-dessous.
+  osrm:
+    image: osrm/osrm-backend:v5.27.1
+    container_name: etl_maroc_osrm
+    profiles: ["osrm"]
+    command: osrm-routed --algorithm mld --max-table-size 10000 /data/morocco-latest.osrm
+    ports:
+      - "5000:5000"
+    volumes:
+      - osrm_data:/data
+
+volumes:
+  osrm_data:
+  # Reutilise le volume nomme cree lors d'une iteration precedente de ce
+  # projet (anciennement "scrapping_SIG" avant renommage du dossier en
+  # ETL-main) -- contient les donnees deja chargees, ne PAS le recreer vide
+  # sous un nouveau nom sous peine de "perdre" (en apparence -- le volume
+  # d'origine resterait sur disque, juste orphelin) tout le travail deja fait.
+  pgdata:
+    name: scrapping_sig_pgdata
+    external: true

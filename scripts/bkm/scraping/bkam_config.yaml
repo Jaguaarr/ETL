@@ -1,0 +1,118 @@
+# bkam_config.yaml
+# -----------------
+# Configuration des sources a scraper sur le site officiel de Bank Al-Maghrib
+# (bkam.ma). Deux jeux de donnees retenus (priorite validee avec le PO :
+# "les deux") :
+#
+#   1. cours_reference : cours de change de reference quotidiens (taux
+#      "Moyen" par devise face au dirham). La page bkam.ma n'affiche que
+#      les derniers jours ouvres disponibles -> scraping INCREMENTAL
+#      (upsert sur devise_code + date_cours), CONTRAIREMENT au full-load
+#      HCP. Il faut donc lancer ce scraper regulierement (ex: cron
+#      quotidien) pour constituer un historique.
+#
+#   2. taux_directeur : historique complet des decisions de politique
+#      monetaire (taux directeur, ratio de reserve obligatoire,
+#      remuneration de la reserve) depuis 2006. La page publie un
+#      snapshot COMPLET a chaque run -> full-load (TRUNCATE + INSERT),
+#      comme HCP.
+#
+# Bank Al-Maghrib ne publie pas de fichier telechargeable stable pour ces
+# deux jeux de donnees (contrairement au HCP) : on scrape directement le
+# tableau HTML de la page (voir bkam_parser.py), de facon generique pour
+# rester robuste aux changements de mise en page.
+
+datasets:
+
+  cours_reference:
+    description: >
+      Cours de reference quotidiens des devises cotees par Bank Al-Maghrib
+      face au dirham marocain (taux "Moyen"), source officielle BAM.
+    page_url: "https://www.bkam.ma/Marches/Principaux-indicateurs/Marche-des-changes/Cours-de-change/Cours-de-reference"
+    table_marker: "Devises"
+    load_strategy: "incremental"   # upsert sur (devise_code, date_cours)
+    output_filename: "bkam_cours_reference.csv"
+
+  taux_directeur:
+    description: >
+      Historique des decisions de politique monetaire de Bank Al-Maghrib
+      (taux directeur, ratio de reserve obligatoire, remuneration de la
+      reserve), depuis 2006.
+    page_url: "https://www.bkam.ma/Politique-monetaire/Cadre-strategique/Decision-de-la-politique-monetaire/Historique-des-decisions"
+    table_marker: "Date"
+    load_strategy: "full"          # TRUNCATE + INSERT a chaque run
+    output_filename: "bkam_taux_directeur.csv"
+
+  # --- Extension "toutes les donnees disponibles" (au-dela des 2 datasets
+  # initiaux), meme patron generique (table_marker + parse_generic_table) ---
+
+  taux_interbancaire:
+    description: >
+      Taux de reference du marche interbancaire (Bid/Ask par maturite),
+      marche monetaire.
+    page_url: "https://www.bkam.ma/Marches/Principaux-indicateurs/Marche-monetaire/Taux-de-reference-du-marche-interbancaire"
+    table_marker: "Maturités"
+    load_strategy: "full"
+    output_filename: "bkam_taux_interbancaire.csv"
+
+  # NB: "Taux debiteurs" (bkam.ma/Marches/Taux-d-interet/Taux-debiteurs) a
+  # ete ecarte : la page ne publie pas ce tableau en HTML statique parsable
+  # (probablement charge en JS), contrairement aux datasets ci-dessus et
+  # ci-dessous, tous verifies en direct (requests + BeautifulSoup, table
+  # HTML statique confirmee page par page). A revisiter avec un scraper
+  # Playwright (meme patron que scripts/hcp/scraping/) si ce jeu de donnees
+  # devient prioritaire.
+
+  # --- 2e extension : reconnaissance live de 8 pages candidates supplementaires
+  # (requests + BeautifulSoup, pas de supposition) -> 4 retenues avec une
+  # table HTML simple, a une seule ligne d'en-tete, directement exploitable
+  # par le parseur generique. Les 3 autres (Taux des depots a terme, Taux
+  # des comptes sur carnet, Operations sur le marche interbancaire
+  # domestique) ont une table HTML valide mais publient des series
+  # MENSUELLES (pas quotidiennes) : ecartees pour l'instant pour rester
+  # sur des jeux de donnees dont le grain temporel est directement
+  # comparable aux 5 datasets ci-dessus (a integrer sans difficulte
+  # technique particuliere si prioritaire, meme patron generique).
+
+  monia:
+    description: >
+      Indice MONIA (Moroccan Overnight Index Average) : reference du taux
+      au jour le jour sur le marche interbancaire, publie quotidiennement.
+    page_url: "https://www.bkam.ma/Marches/Principaux-indicateurs/Marche-monetaire/Indice-monia-moroccan-overnight-index-average"
+    table_marker: "Indice MONIA"
+    load_strategy: "full"
+    output_filename: "bkam_monia.csv"
+
+  marche_interbancaire:
+    description: >
+      Marche monetaire interbancaire : taux moyen pondere, volume et
+      encours quotidiens des operations au jour le jour entre banques.
+    page_url: "https://www.bkam.ma/Marches/Principaux-indicateurs/Marche-monetaire/Marche-monetaire-interbancaire"
+    table_marker: "Date"
+    load_strategy: "full"
+    output_filename: "bkam_marche_interbancaire.csv"
+
+  bt_taux_reference:
+    description: >
+      Taux de reference des bons du Tresor sur le marche secondaire, par
+      date d'echeance.
+    page_url: "https://www.bkam.ma/Marches/Principaux-indicateurs/Marche-obligataire/Marche-des-bons-de-tresor/Marche-secondaire/Taux-de-reference-des-bons-du-tresor"
+    table_marker: "Date d'échéance"
+    load_strategy: "full"
+    output_filename: "bkam_bt_taux_reference.csv"
+
+  adjudications_devises:
+    description: >
+      Resultats des adjudications en devises (marche des changes) :
+      montants demandes/alloues et cours min/max par devise et par date.
+    page_url: "https://www.bkam.ma/Marches/Principaux-indicateurs/Marche-des-changes/Resultats-des-adjudications-en-devises"
+    table_marker: "Date d’adjudication"
+    load_strategy: "full"
+    output_filename: "bkam_adjudications_devises.csv"
+
+http:
+  user_agent: "ETL-Maroc-Pipeline/2.0 (+contact: safae.haj@gmail.com; usage academique/interne de collecte de donnees publiques)"
+  timeout_seconds: 30
+  max_retries: 3
+  backoff_seconds: 5
+  delay_between_requests_seconds: 2

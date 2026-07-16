@@ -1,0 +1,38 @@
+# gglmaps_mobility_config.yaml
+# ------------------------------
+# Config de la couche MOBILITE Google Maps -- meme moteur Playwright que
+# gglmaps_config.yaml (POIs, cf. gglmaps_engine.py), grille et sortie
+# separees. Categories limitees a ce qui est effectivement un resultat de
+# recherche Google Maps (une "fiche" avec adresse/Plus Code) : le reseau
+# routier et les lignes ferroviaires N'EN SONT PAS -- ils vivent sur OSM
+# (scripts/osm/scraping/scrape_osm_mobility.py).
+
+categories:
+  gare:
+    - "gare"
+    - "gare ferroviaire"
+  gare_oncf:
+    - "gare ONCF"
+  station_tram:
+    - "station tramway"
+    - "arrêt tramway"
+  port:
+    - "port"
+  aeroport:
+    - "aéroport"
+
+search:
+  communes_reference: "../../../datasets/hcp/reference/geo_reference.csv"
+  max_scroll_stale: 3
+  scroll_wait_seconds: 1.2
+
+browser:
+  headless: true
+  viewport_width: 1600
+  viewport_height: 1000
+  nav_timeout_ms: 60000
+  delay_between_queries_seconds: 2.5
+  delay_between_details_seconds: 1.0
+
+output:
+  places_filename: "gglmaps_mobility.csv"

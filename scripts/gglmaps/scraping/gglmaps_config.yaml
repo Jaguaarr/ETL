@@ -1,0 +1,62 @@
+# scraper_config.yaml
+# ---------------------
+# Scraping DIRECT de Google Maps (maps.google.com) via Playwright.
+#
+# ATTENTION : cette approche viole les Conditions d'Utilisation de Google
+# et est plus fragile qu'une API officielle (blocages IP, CAPTCHA,
+# changements de DOM sans preavis). Utilisee uniquement parce que l'API
+# Places (New) necessite une facturation. A executer avec des delais
+# raisonnables (cf. section browser) et en evitant le volume massif/continu.
+#
+# Grille : 1 recherche Google Maps par (commune x categorie x terme de
+# recherche) -- meme decoupage communes que scripts/gglmaps/scraping/
+# scrape_places.py (API) pour rester comparable entre les 2 sources.
+
+categories:
+  # Chaque categorie peut avoir plusieurs termes de recherche (FR), pour
+  # une meilleure couverture qu'un seul mot-cle -- alignes le plus possible
+  # sur les categories Places API (New) / OSM pour comparaison directe.
+  restaurant:
+    - "restaurant"
+    - "café"
+  lodging:
+    - "hôtel"
+    - "riad"
+  hospital:
+    - "hôpital"
+    - "clinique"
+  pharmacy:
+    - "pharmacie"
+  school:
+    - "école"
+    - "lycée"
+  bank:
+    - "banque"
+  supermarket:
+    - "supermarché"
+    - "épicerie"
+  tourist_attraction:
+    - "site touristique"
+    - "monument"
+  place_of_worship:
+    - "mosquée"
+    - "église"
+  government_office:
+    - "administration"
+    - "commune"
+
+search:
+  communes_reference: "../../../datasets/hcp/reference/geo_reference.csv"
+  max_scroll_stale: 3        # scrolls consecutifs sans nouveau resultat avant d'arreter
+  scroll_wait_seconds: 1.2
+
+browser:
+  headless: true
+  viewport_width: 1600
+  viewport_height: 1000
+  nav_timeout_ms: 60000
+  delay_between_queries_seconds: 2.5   # entre 2 recherches (commune x categorie x terme)
+  delay_between_details_seconds: 1.0   # entre 2 fiches detail ouvertes
+
+output:
+  places_filename: "gglmaps_scraped_places.csv"

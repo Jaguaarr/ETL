@@ -1,0 +1,30 @@
+# Secrets
+.env
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Donnees scrapees (regenerees par les scripts scraping/*) -- on garde
+# uniquement le referentiel geo canonique (reference/) qui sert de source
+# partagee a OSM et Google Maps.
+datasets/hcp/raw/
+datasets/hcp/*.csv
+datasets/bkm/*.csv
+datasets/bkm/raw/
+datasets/osm/*.geojson
+datasets/osm/*.csv
+datasets/osm/raw/
+datasets/gglmaps/*.csv
+datasets/gglmaps/raw/
+# datasets/hcp/reference/*.csv (geo_reference.csv) reste versionne : c'est
+# la source canonique partagee par HCP/OSM/Google Maps.
+#
+# Les 3 GeoJSON de limites administratives (regions/provinces/communes)
+# restent versionnes eux aussi : sources canoniques (obtenues une fois pour
+# toute), pas regenerees par un scraper -- scripts/osm/scraping/
+# scrape_admin_boundaries.py les LIT en prerequis, il ne les produit pas.
+!datasets/osm/admin_boundaries_regions.geojson
+!datasets/osm/admin_boundaries_provinces.geojson
+!datasets/osm/admin_boundaries_communes.geojson

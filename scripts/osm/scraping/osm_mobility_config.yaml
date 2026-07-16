@@ -1,0 +1,45 @@
+# osm_mobility_config.yaml
+# -------------------------
+# Configuration du scraping de la couche MOBILITE OpenStreetMap (reseau
+# routier, lignes ferroviaires/gares/ONCF, tram, ports, aeroports) --
+# separee des POIs (osm_config.yaml) : sortie dans un CSV different
+# (datasets/osm/osm_mobility.csv), jamais melangee a osm_pois.csv.
+#
+# Meme mecanique de batching par province qu'osm_config.yaml (cf.
+# overpass_batch.py) mais avec `out geom tags;` (pas `out center tags;`) :
+# les elements lineaires (routes, voies ferrees) ont besoin de leur
+# geometrie complete, pas seulement d'un point central. Limite aux node/way
+# (pas les relations, dont l'assemblage de geometrie multi-membres via
+# Overpass est nettement plus complexe et couvre une part marginale du
+# reseau routier/ferroviaire marocain sur OSM).
+categories:
+  highway: [motorway, trunk, primary, secondary, tertiary]   # reseau routier + autoroutes
+  railway: [rail, station, halt, tram, tram_stop]              # lignes ferroviaires, gares, tram
+  aeroway: [aerodrome, terminal]                                # aeroports
+  amenity: [ferry_terminal]                                      # ports (terminal ferry)
+  landuse: [harbour]                                              # ports (zone portuaire)
+
+overpass_endpoints:
+  - "https://overpass-api.de/api/interpreter"
+  - "https://overpass.kumi.systems/api/interpreter"
+  # overpass.openstreetmap.ru retire : injoignable en pratique, cf.
+  # commentaire dans osm_config.yaml.
+
+http:
+  user_agent: "ETL-Maroc-Pipeline/2.0 (+contact: safae.haj@gmail.com; usage academique/interne de collecte de donnees publiques ; respect Overpass fair-use policy)"
+  timeout_seconds: 180
+  max_retries: 3
+  backoff_seconds: 10
+
+batch:
+  max_workers: 3
+
+communes_reference: "../../../datasets/hcp/reference/geo_reference.csv"
+
+output:
+  mobility_filename: "osm_mobility.csv"
+  # Table de liaison N:N (une route/voie ferree peut traverser plusieurs
+  # communes) -- calculee en Python au scraping (memes polygones communaux
+  # que l'assignation des elements ponctuels), pas via une jointure SQL
+  # fragile en silver (cf. commentaire dans scrape_osm_mobility.py).
+  communes_traversees_filename: "osm_mobility_communes_traversees.csv"
