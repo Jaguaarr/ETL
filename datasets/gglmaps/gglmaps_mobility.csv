@@ -1,0 +1,512 @@
+commune_code,commune_nom,category,search_term,name,address,lat,lon
+MA-01-051-1107,Bni Abdellah,gare,gare,محطة ولاد زيان,Casablanca 20320,34.5734375,-3.5863125
+MA-01-051-1107,Bni Abdellah,gare,gare,Casa Port,,33.5994804,-7.6128264
+MA-01-051-1107,Bni Abdellah,gare,gare,Ctre Commune Beni Abdellah,,35.0573348,-4.0733783
+MA-01-051-1107,Bni Abdellah,gare,gare,Casa Voyageurs,,33.5896911,-7.5909106
+MA-01-051-1107,Bni Abdellah,gare,gare,Gare BERRECHID,,33.2603876,-7.5921341
+MA-01-051-1107,Bni Abdellah,gare,gare,CTM,,33.5960914,-7.6110031
+MA-01-051-1107,Bni Abdellah,gare,gare,Gare de Mohammédia,,33.6956345,-7.3877604
+MA-01-051-1107,Bni Abdellah,gare,gare ferroviaire,Aïn Sebaâ,,33.6084997,-7.5241744
+MA-01-051-1107,Bni Abdellah,gare,gare ferroviaire,Casa Port,,33.5994804,-7.6128264
+MA-01-051-1107,Bni Abdellah,gare,gare ferroviaire,Casa Voyageurs,,33.5896911,-7.5909106
+MA-01-051-1107,Bni Abdellah,gare,gare ferroviaire,Gare ONCF Aït Nsar - Beni Ansar,,35.2436934,-2.9323022
+MA-01-051-1107,Bni Abdellah,gare,gare ferroviaire,Gare BERRECHID,,33.2603876,-7.5921341
+MA-01-051-1107,Bni Abdellah,gare,gare ferroviaire,ancien gare,,34.0182106,-2.0226892
+MA-01-051-1107,Bni Abdellah,gare,gare ferroviaire,Gare de Mohammédia,,33.6956345,-7.3877604
+MA-01-051-1107,Bni Abdellah,gare_oncf,gare ONCF,Aïn Sebaâ,,33.6084997,-7.5241744
+MA-01-051-1107,Bni Abdellah,gare_oncf,gare ONCF,Casa Port,,33.5994804,-7.6128264
+MA-01-051-1107,Bni Abdellah,gare_oncf,gare ONCF,Casa Voyageurs,,33.5896911,-7.5909106
+MA-01-051-1107,Bni Abdellah,gare_oncf,gare ONCF,Gare BERRECHID,,33.2603876,-7.5921341
+MA-01-051-1107,Bni Abdellah,gare_oncf,gare ONCF,L'Oasis,,33.5547995,-7.6315469
+MA-01-051-1107,Bni Abdellah,gare_oncf,gare ONCF,Gare de Mohammédia,,33.6956345,-7.3877604
+MA-01-051-1107,Bni Abdellah,station_tram,station tramway,Abdellah Ben Cherif,,33.56589,-7.6602156
+MA-01-051-1107,Bni Abdellah,station_tram,station tramway,Station Tramway Sidi Mohammed Ben Abdellah,,34.0160752,-6.8546667
+MA-01-051-1107,Bni Abdellah,station_tram,station tramway,"Station Tramway, Derb Sultan.",,33.5720907,-7.5958624
+MA-01-051-1107,Bni Abdellah,station_tram,station tramway,"Station Tramway Anoual, Casablanca",,33.5694716,-7.6250691
+MA-01-051-1107,Bni Abdellah,station_tram,station tramway,Station tramway Abdelmoumen,,33.5710237,-7.6259551
+MA-01-051-1107,Bni Abdellah,station_tram,station tramway,Station Sidi Moumen Terminus,,33.5872092,-7.5009224
+MA-01-051-1107,Bni Abdellah,station_tram,station tramway,Station Tramway Riviera,,33.5709513,-7.6362222
+MA-01-051-1107,Bni Abdellah,station_tram,station tramway,Station Tramway Oasis,,33.5549432,-7.6309509
+MA-01-051-1107,Bni Abdellah,station_tram,station tramway,Terminus Tramway Ain Diab,,33.5874824,-7.6808435
+MA-01-051-1107,Bni Abdellah,station_tram,station tramway,Hay Andia,,33.5613629,-7.6528062
+MA-01-051-1107,Bni Abdellah,station_tram,station tramway,Ghandi,,33.56855,-7.64492
+MA-01-051-1107,Bni Abdellah,station_tram,station tramway,Salmia 2 Terminus,,33.53715,-7.55083
+MA-01-051-1107,Bni Abdellah,station_tram,station tramway,Agence Casa Voyageurs Tram,,33.5899856,-7.5907827
+MA-01-051-1107,Bni Abdellah,station_tram,station tramway,Station Tramway Bab Chellah,,34.0237762,-6.8337079
+MA-01-051-1107,Bni Abdellah,station_tram,station tramway,Casa Port,,33.5994804,-7.6128264
+MA-01-051-1107,Bni Abdellah,station_tram,arrêt tramway,Abdellah Ben Cherif,,33.56589,-7.6602156
+MA-01-051-1107,Bni Abdellah,station_tram,arrêt tramway,Station Tramway Sidi Mohammed Ben Abdellah,,34.0160752,-6.8546667
+MA-01-051-1107,Bni Abdellah,station_tram,arrêt tramway,Station Sidi Moumen Terminus,,33.5872092,-7.5009224
+MA-01-051-1107,Bni Abdellah,station_tram,arrêt tramway,Abdelkader Essahraoui,,33.555759,-7.547525
+MA-01-051-1107,Bni Abdellah,station_tram,arrêt tramway,Station Tramway Riviera,,33.5709513,-7.6362222
+MA-01-051-1107,Bni Abdellah,station_tram,arrêt tramway,Station tramway Abdelmoumen,,33.5710237,-7.6259551
+MA-01-051-1107,Bni Abdellah,station_tram,arrêt tramway,Hay Andia,,33.5613629,-7.6528062
+MA-01-051-1107,Bni Abdellah,station_tram,arrêt tramway,Station Tramway Marché central,,33.5946426,-7.6124382
+MA-01-051-1107,Bni Abdellah,station_tram,arrêt tramway,Station Tramway Oasis,,33.5549432,-7.6309509
+MA-01-051-1107,Bni Abdellah,station_tram,arrêt tramway,"Station Tramway Anoual, Casablanca",,33.5694716,-7.6250691
+MA-01-051-1107,Bni Abdellah,station_tram,arrêt tramway,Bni Yakhlef 2,,33.661143,-7.342501
+MA-01-051-1107,Bni Abdellah,station_tram,arrêt tramway,Terminus Tramway Hopital Moulay Abdellah,,34.0251416,-6.7536752
+MA-01-051-1107,Bni Abdellah,station_tram,arrêt tramway,Salmia 2 Terminus,,33.53715,-7.55083
+MA-01-051-1107,Bni Abdellah,station_tram,arrêt tramway,Ghandi,,33.56855,-7.64492
+MA-01-051-1107,Bni Abdellah,station_tram,arrêt tramway,A-Sidi Mohammed Ben Abdellah,,34.0161743,-6.8547359
+MA-01-051-1107,Bni Abdellah,port,port,Port de Nador Béni Ensar,,35.271087,-2.918179
+MA-01-051-1107,Bni Abdellah,port,port,Port Beni Ensar Abu-Noah,,35.2708875,-2.9265264
+MA-01-051-1107,Bni Abdellah,port,port,Port de Casablanca,,33.6037308,-7.5965129
+MA-01-051-1107,Bni Abdellah,port,port,Agence Nationale des Ports,,33.5390012,-7.6426445
+MA-01-051-1107,Bni Abdellah,port,port,Ctre Commune Beni Abdellah,,35.0573348,-4.0733783
+MA-01-051-1107,Bni Abdellah,port,port,Gare Maritime Port de Nador,,35.2697467,-2.9279657
+MA-01-051-1107,Bni Abdellah,port,port,Puerto,,35.2664677,-2.9286908
+MA-01-051-1107,Bni Abdellah,port,port,ANP : Agence Nationale des Ports_Beni Ensar Nador,,35.2677965,-2.9274147
+MA-01-051-1107,Bni Abdellah,port,port,Port de Mohammedia,,33.7158258,-7.3989358
+MA-01-051-1107,Bni Abdellah,port,port,Port de Ras Kebdana,,35.1459183,-2.4204578
+MA-01-051-1107,Bni Abdellah,port,port,Moumeni Store,,33.5682172,-7.6230526
+MA-01-051-1107,Bni Abdellah,aeroport,aéroport,Aéroport de Béni Mellal,,32.3967064,-6.3277034
+MA-01-051-1107,Bni Abdellah,aeroport,aéroport,Aéroport de Benslimane,,33.6527559,-7.228851
+MA-01-051-1107,Bni Abdellah,aeroport,aéroport,Aéroport international Mohammed V de Casablanca,,33.3702714,-7.5829065
+MA-01-051-1107,Bni Abdellah,aeroport,aéroport,Aéroport de Rabat-Salé,,34.0502967,-6.7495096
+MA-01-051-1107,Bni Abdellah,aeroport,aéroport,Airport Tangier Ibn Batouta,,35.7261039,-5.9129331
+MA-01-051-1107,Bni Abdellah,aeroport,aéroport,Aeria Mall,,33.5632503,-7.6637259
+MA-01-051-1107,Bni Abdellah,aeroport,aéroport,Aéroport de Bouârfa,,32.5175126,-1.9771703
+MA-01-051-1107,Bni Abdellah,aeroport,aéroport,Aéroport Ifrane,,33.5018666,-5.1612977
+MA-01-051-1107,Bni Abdellah,aeroport,aéroport,Aéroport de TanTan,,28.4454415,-11.1590684
+MA-01-051-1107,Bni Abdellah,aeroport,aéroport,Aéroport international Marrakech-Ménara,,31.6017479,-8.0257112
+MA-01-051-1107,Bni Abdellah,aeroport,aéroport,CTM,,33.5960914,-7.6110031
+MA-01-051-1107,Bni Abdellah,aeroport,aéroport,Aéroport international Agadir-Al Massira,,30.3299288,-9.4102859
+MA-01-051-1107,Bni Abdellah,aeroport,aéroport,Aéroport de Dakhla,,23.7137404,-15.9282536
+MA-01-051-1107,Bni Abdellah,aeroport,aéroport,sky light tours (airport transfert),,31.8008346,-7.1513478
+MA-01-051-1109,Bni Hadifa,gare,gare,Bni Hadifa,,35.0223967,-4.1421406
+MA-01-051-1109,Bni Hadifa,gare,gare,قيادة بني حديفة,,35.0228195,-4.1420827
+MA-01-051-1109,Bni Hadifa,gare,gare,Bni Hadifa,,34.9780409,-4.1820961
+MA-01-051-1109,Bni Hadifa,gare_oncf,gare ONCF,Aïn Sebaâ,,33.6084997,-7.5241744
+MA-01-051-1109,Bni Hadifa,gare_oncf,gare ONCF,Casa Voyageurs,,33.5896911,-7.5909106
+MA-01-051-1109,Bni Hadifa,gare_oncf,gare ONCF,Gare ONCF Aït Nsar - Beni Ansar,,35.2436934,-2.9323022
+MA-01-051-1109,Bni Hadifa,gare_oncf,gare ONCF,Gare BERRECHID,,33.2603876,-7.5921341
+MA-01-051-1109,Bni Hadifa,gare_oncf,gare ONCF,L'Oasis,,33.5547995,-7.6315469
+MA-01-051-1109,Bni Hadifa,gare_oncf,gare ONCF,Oujda,,34.6795044,-1.9247779
+MA-01-051-1109,Bni Hadifa,station_tram,station tramway,Tramway Station Ibn Tachfine,,33.5808252,-7.5631698
+MA-01-051-1109,Bni Hadifa,station_tram,station tramway,Station Tramway Hay El Farah.,,33.57167,-7.5863937
+MA-01-051-1109,Bni Hadifa,station_tram,station tramway,"Station Tramway, Derb Sultan.",,33.5720907,-7.5958624
+MA-01-051-1109,Bni Hadifa,station_tram,station tramway,Terminus Tramway Ain Diab,,33.5874824,-7.6808435
+MA-01-051-1109,Bni Hadifa,station_tram,station tramway,Station Tramway Derb Ghalef,,33.5700339,-7.6312109
+MA-01-051-1109,Bni Hadifa,station_tram,station tramway,Casa Port Terminus,,33.597952,-7.610986
+MA-01-051-1109,Bni Hadifa,station_tram,station tramway,"Station Tramway Anoual, Casablanca",,33.5694716,-7.6250691
+MA-01-051-1109,Bni Hadifa,station_tram,station tramway,قيادة بني حديفة,,35.0228195,-4.1420827
+MA-01-051-1109,Bni Hadifa,port,port,Port de Nador Béni Ensar,,35.271087,-2.918179
+MA-01-051-1109,Bni Hadifa,port,port,Bni Hadifa,,35.0223967,-4.1421406
+MA-01-051-1109,Bni Hadifa,port,port,Port de Casablanca,,33.6037308,-7.5965129
+MA-01-051-1109,Bni Hadifa,port,port,Gare Maritime Port de Nador,,35.2697467,-2.9279657
+MA-01-051-1101,Ait Kamra,gare,gare,Ait-Kamara,,35.1441162,-3.9827405
+MA-01-051-1101,Ait Kamra,gare,gare,Gare Routiére d'Al Hoceima,,35.233848,-3.9290391
+MA-01-051-1101,Ait Kamra,gare_oncf,gare ONCF,Casa Voyageurs,,33.5896911,-7.5909106
+MA-01-051-1101,Ait Kamra,gare_oncf,gare ONCF,Gare Rabat Ville,,34.0164635,-6.8356942
+MA-01-051-1101,Ait Kamra,station_tram,station tramway,Station tramway AL Amane,,33.599189,-7.5328755
+MA-01-051-1101,Ait Kamra,station_tram,station tramway,Ali Yata,,33.591476,-7.569933
+MA-01-051-1101,Ait Kamra,station_tram,station tramway,Ait-Kamara,,35.1441162,-3.9827405
+MA-01-051-1101,Ait Kamra,station_tram,arrêt tramway,Station tramway AL Amane,,33.599189,-7.5328755
+MA-01-051-1101,Ait Kamra,station_tram,arrêt tramway,Ali Yata,,33.591476,-7.569933
+MA-01-051-1101,Ait Kamra,station_tram,arrêt tramway,Ait-Kamara,,35.1441162,-3.9827405
+MA-01-051-1101,Ait Kamra,station_tram,arrêt tramway,Station tramway Mdakra.,,33.5812928,-7.5633331
+MA-01-051-1101,Ait Kamra,station_tram,arrêt tramway,Al Amane,,33.599183,-7.532944
+MA-01-051-1101,Ait Kamra,station_tram,arrêt tramway,Station Tramway Marché central,,33.5946426,-7.6124382
+MA-01-051-1101,Ait Kamra,station_tram,arrêt tramway,Casa Tram SA,,33.578577,-7.515474
+MA-01-051-1101,Ait Kamra,station_tram,arrêt tramway,Terminus Tramway Ain Diab,,33.5874824,-7.6808435
+MA-01-051-1101,Ait Kamra,station_tram,arrêt tramway,"Station Tramway Anoual, Casablanca",,33.5694716,-7.6250691
+MA-01-051-1101,Ait Kamra,station_tram,arrêt tramway,Station Tramway Place 16 Novembre,,34.0245809,-6.8252777
+MA-01-051-1101,Ait Kamra,station_tram,arrêt tramway,Terminus Tramway Sidi Bernoussi T2,,33.6101211,-7.5098808
+MA-01-051-1101,Ait Kamra,station_tram,arrêt tramway,Terminus Tramway Hay Karima,,34.0543172,-6.7942876
+MA-01-051-1101,Ait Kamra,port,port,Al Hoceima Port,,35.246376,-3.923842
+MA-01-051-1101,Ait Kamra,port,port,Marina Al Hoceima,,35.2501302,-3.9216059
+MA-01-051-1101,Ait Kamra,aeroport,aéroport,Aéroport Al Hoceima Cherif Al Idrissi,,35.1787589,-3.8430133
+MA-01-051-1101,Ait Kamra,aeroport,aéroport,Ait-Kamara,,35.1441162,-3.9827405
+MA-01-051-1125,Zaouiat Sidi Abdelkader,station_tram,station tramway,Terminus Tramway Sidi Bernoussi T2,,33.6101211,-7.5098808
+MA-01-051-1125,Zaouiat Sidi Abdelkader,station_tram,station tramway,Hôpital de Sidi Moumen,,33.576404,-7.517978
+MA-01-051-1125,Zaouiat Sidi Abdelkader,station_tram,station tramway,Station tramway Hay rajae,,33.5765868,-7.5483195
+MA-01-051-1125,Zaouiat Sidi Abdelkader,station_tram,station tramway,Station Tramway Oasis,,33.5549432,-7.6309509
+MA-01-051-1125,Zaouiat Sidi Abdelkader,station_tram,station tramway,"Station Tramway, Derb Sultan.",,33.5720907,-7.5958624
+MA-01-051-1125,Zaouiat Sidi Abdelkader,station_tram,station tramway,Sation Tramway Grand Cienture,,33.5904608,-7.5734995
+MA-01-051-1125,Zaouiat Sidi Abdelkader,station_tram,station tramway,Station Tramway Riviera,,33.5709513,-7.6362222
+MA-01-051-1125,Zaouiat Sidi Abdelkader,station_tram,station tramway,Terminus Tramway Ain Diab,,33.5874824,-7.6808435
+MA-01-051-1125,Zaouiat Sidi Abdelkader,station_tram,station tramway,Zaouiat Sidi Abdelkader,,34.9145454,-4.127709
+MA-01-051-1125,Zaouiat Sidi Abdelkader,station_tram,station tramway,Station tramway Abdelmoumen,,33.5710237,-7.6259551
+MA-01-051-1125,Zaouiat Sidi Abdelkader,station_tram,station tramway,"Station Tramway Anoual, Casablanca",,33.5694716,-7.6250691
+MA-01-051-1125,Zaouiat Sidi Abdelkader,station_tram,station tramway,Station Tramway Sidi Mohammed Ben Abdellah,,34.0160752,-6.8546667
+MA-01-051-1125,Zaouiat Sidi Abdelkader,station_tram,station tramway,Sidi Abderrahmane,,33.5722338,-7.6694862
+MA-01-051-1125,Zaouiat Sidi Abdelkader,station_tram,station tramway,Hay Raja,,33.576612,-7.548226
+MA-01-051-1121,Rouadi,gare,gare ferroviaire,Gare de Mohammédia,,33.6956345,-7.3877604
+MA-01-051-1121,Rouadi,gare,gare ferroviaire,Rabat Riad,,33.964229,-6.882928
+MA-01-051-1121,Rouadi,gare,gare ferroviaire,Gare Rabat Riad,,33.9637328,-6.8827799
+MA-01-051-1121,Rouadi,gare,gare ferroviaire,La Gare Mohammed Dyouri,,33.5937206,-7.6084051
+MA-01-051-1121,Rouadi,gare,gare ferroviaire,Gare Rabat Ville,,34.0164635,-6.8356942
+MA-01-051-1121,Rouadi,gare_oncf,gare ONCF,Casa Voyageurs,,33.5896911,-7.5909106
+MA-01-051-1121,Rouadi,gare_oncf,gare ONCF,Gare ONCF de L Oasis_,,33.555019,-7.631099
+MA-01-051-1121,Rouadi,gare_oncf,gare ONCF,Gare de Mohammédia,,33.6956345,-7.3877604
+MA-01-051-1121,Rouadi,gare_oncf,gare ONCF,Casa Port,,33.5994804,-7.6128264
+MA-01-051-1121,Rouadi,gare_oncf,gare ONCF,Gare Rabat Ville,,34.0164635,-6.8356942
+MA-01-051-1121,Rouadi,gare_oncf,gare ONCF,Aïn Sebaâ,,33.6084997,-7.5241744
+MA-01-051-1121,Rouadi,gare_oncf,gare ONCF,Office National des Chemins de Fer,,34.0040167,-6.8530243
+MA-01-051-1121,Rouadi,gare_oncf,gare ONCF,L'Oasis,,33.5547995,-7.6315469
+MA-01-051-1121,Rouadi,gare_oncf,gare ONCF,Gare BERRECHID,,33.2603876,-7.5921341
+MA-01-051-1121,Rouadi,gare_oncf,gare ONCF,Gare Tanger Ville,,35.7715294,-5.7859866
+MA-01-051-1121,Rouadi,gare_oncf,gare ONCF,Gare ONCF Aéroport Mohamed V,,33.3737827,-7.579692
+MA-01-051-1121,Rouadi,gare_oncf,gare ONCF,Gare Rabat Agdal,,34.0021353,-6.855586
+MA-01-051-1121,Rouadi,station_tram,station tramway,Station tramway Hay rajae,,33.5765868,-7.5483195
+MA-01-051-1121,Rouadi,station_tram,station tramway,Station tramway Mdakra.,,33.5812928,-7.5633331
+MA-01-051-1121,Rouadi,station_tram,station tramway,Station Tramway Abi dar el ghafari,,33.6067212,-7.5184739
+MA-01-051-1121,Rouadi,station_tram,station tramway,"Station Tramway, Derb Sultan.",,33.5720907,-7.5958624
+MA-01-051-1121,Rouadi,station_tram,station tramway,Station Tramway Riviera,,33.5709513,-7.6362222
+MA-01-051-1121,Rouadi,station_tram,station tramway,Ali Yata,,33.591476,-7.569933
+MA-01-051-1121,Rouadi,station_tram,station tramway,Station Tramway Mohamed Diouri,,33.593582,-7.6075749
+MA-01-051-1121,Rouadi,station_tram,station tramway,Station Casa Tramway Abou Chouaïb Doukali,,33.5614625,-7.5946719
+MA-01-051-1121,Rouadi,station_tram,station tramway,La Gare Mohammed Dyouri,,33.5937206,-7.6084051
+MA-01-051-1121,Rouadi,station_tram,station tramway,Station Tramway Attacharouk,,33.5729291,-7.5241602
+MA-01-051-1121,Rouadi,station_tram,station tramway,Terminus Tramway Ain Diab,,33.5874824,-7.6808435
+MA-01-051-1121,Rouadi,station_tram,station tramway,Station tramway Abdelmoumen,,33.5710237,-7.6259551
+MA-01-051-1121,Rouadi,station_tram,arrêt tramway,Mohammed Erradi Terminus,,33.5691,-7.517936
+MA-01-051-1121,Rouadi,station_tram,arrêt tramway,Station Tramway Abi dar el ghafari,,33.6067212,-7.5184739
+MA-01-051-1121,Rouadi,station_tram,arrêt tramway,Station tramway Hay rajae,,33.5765868,-7.5483195
+MA-01-051-1121,Rouadi,station_tram,arrêt tramway,Ali Yata,,33.591476,-7.569933
+MA-01-051-1121,Rouadi,station_tram,arrêt tramway,"Station Tramway, Derb Sultan.",,33.5720907,-7.5958624
+MA-01-051-1121,Rouadi,station_tram,arrêt tramway,Station Casa Tramway Abou Chouaïb Doukali,,33.5614625,-7.5946719
+MA-01-051-1121,Rouadi,station_tram,arrêt tramway,La Gare Mohammed Dyouri,,33.5937206,-7.6084051
+MA-01-051-1121,Rouadi,station_tram,arrêt tramway,Station Tramway Riviera,,33.5709513,-7.6362222
+MA-01-051-1121,Rouadi,station_tram,arrêt tramway,Terminus Tramway Ain Diab,,33.5874824,-7.6808435
+MA-01-051-1121,Rouadi,station_tram,arrêt tramway,Station Tramway Mohamed Diouri,,33.593582,-7.6075749
+MA-01-051-1121,Rouadi,station_tram,arrêt tramway,Station Tramway Attacharouk,,33.5729291,-7.5241602
+MA-01-051-1121,Rouadi,station_tram,arrêt tramway,Terminus Tramway Sidi Bernoussi T2,,33.6101211,-7.5098808
+MA-01-051-1121,Rouadi,station_tram,arrêt tramway,Station tramway Abdelmoumen,,33.5710237,-7.6259551
+MA-01-051-1121,Rouadi,station_tram,arrêt tramway,Station Tramway Marché central,,33.5946426,-7.6124382
+MA-01-051-1121,Rouadi,station_tram,arrêt tramway,Casa Tram SA,,33.578577,-7.515474
+MA-01-051-1121,Rouadi,station_tram,arrêt tramway,Station Tramway Sidi Abderrahmane.,,33.5718089,-7.6692433
+MA-01-051-1121,Rouadi,station_tram,arrêt tramway,"Station Tramway Anoual, Casablanca",,33.5694716,-7.6250691
+MA-01-051-1121,Rouadi,station_tram,arrêt tramway,Station Tramway Oasis,,33.5549432,-7.6309509
+MA-01-051-1121,Rouadi,station_tram,arrêt tramway,Station Sidi Moumen Terminus,,33.5872092,-7.5009224
+MA-01-051-1121,Rouadi,station_tram,arrêt tramway,Abdelkader Essahraoui,,33.555759,-7.547525
+MA-01-051-1121,Rouadi,station_tram,arrêt tramway,Sation Tramway Grand Cienture,,33.5904608,-7.5734995
+MA-01-051-1121,Rouadi,station_tram,arrêt tramway,Mohammed Bouziane,,33.563561,-7.554288
+MA-01-051-1121,Rouadi,station_tram,arrêt tramway,Abi Dar El Ghafari,,33.606614,-7.518053
+MA-01-051-1121,Rouadi,station_tram,arrêt tramway,Agence Casa Voyageurs Tram,,33.5899856,-7.5907827
+MA-01-051-1121,Rouadi,station_tram,arrêt tramway,Hay Al Wahda Terminus,,33.545766,-7.547381
+MA-01-051-1121,Rouadi,station_tram,arrêt tramway,Idriss El Allam,,33.559666,-7.55089
+MA-01-051-1121,Rouadi,aeroport,aéroport,Aéroport international Mohammed V de Casablanca,,33.3702714,-7.5829065
+MA-01-051-1121,Rouadi,aeroport,aéroport,Emirates F8,,33.3758098,-7.5824326
+MA-01-051-1121,Rouadi,aeroport,aéroport,Aéroport de Rabat-Salé,,34.0502967,-6.7495096
+MA-01-051-1121,Rouadi,aeroport,aéroport,Aéroport Al Hoceima Cherif Al Idrissi,,35.1787589,-3.8430133
+MA-01-051-1115,Izemmouren,gare,gare,Gare AZEMMOUR HALTE,,33.2751977,-8.3431426
+MA-01-051-1115,Izemmouren,gare,gare,Gare routière d'Imzouren,,35.1565124,-3.8489646
+MA-01-051-1115,Izemmouren,gare,gare,Gare routière d'Azemmour,,33.2806475,-8.3421285
+MA-01-051-1115,Izemmouren,gare,gare,Gare Ferroviaire Azemmour,,33.2751178,-8.3431241
+MA-01-051-1115,Izemmouren,gare,gare,Gare Routiére d'Al Hoceima,,35.233848,-3.9290391
+MA-01-051-1115,Izemmouren,gare,gare,Ziz Izemmouren,,35.2101539,-3.9798507
+MA-01-051-1115,Izemmouren,gare,gare ferroviaire,Gare Ferroviaire Azemmour,,33.2751178,-8.3431241
+MA-01-051-1115,Izemmouren,gare,gare ferroviaire,Gare AZEMMOUR HALTE,,33.2751977,-8.3431426
+MA-01-051-1115,Izemmouren,gare,gare ferroviaire,Gare routière d'Imzouren,,35.1565124,-3.8489646
+MA-01-051-1115,Izemmouren,gare_oncf,gare ONCF,Gare Ferroviaire Azemmour,,33.2751178,-8.3431241
+MA-01-051-1115,Izemmouren,gare_oncf,gare ONCF,Gare AZEMMOUR HALTE,,33.2751977,-8.3431426
+MA-01-051-1115,Izemmouren,station_tram,station tramway,Route Azemmour_,,33.577787,-7.67277
+MA-01-051-1115,Izemmouren,station_tram,station tramway,Station tramway Hay Hassani,,33.5764134,-7.6728317
+MA-01-051-1115,Izemmouren,station_tram,station tramway,Station Tramway Oasis,,33.5549432,-7.6309509
+MA-01-051-1115,Izemmouren,station_tram,arrêt tramway,Tramway Station Ibn Tachfine,,33.5808252,-7.5631698
+MA-01-051-1115,Izemmouren,station_tram,arrêt tramway,Route Azemmour_,,33.577787,-7.67277
+MA-01-051-1115,Izemmouren,station_tram,arrêt tramway,Station Sidi Moumen Terminus,,33.5872092,-7.5009224
+MA-01-051-1115,Izemmouren,station_tram,arrêt tramway,Terminus Tramway Sidi Moumen.,,33.5869864,-7.5014597
+MA-01-051-1115,Izemmouren,station_tram,arrêt tramway,Station Tramway Marché central,,33.5946426,-7.6124382
+MA-01-051-1115,Izemmouren,station_tram,arrêt tramway,Station Tramway Oasis,,33.5549432,-7.6309509
+MA-01-051-1115,Izemmouren,station_tram,arrêt tramway,Station tramway Hay Hassani,,33.5764134,-7.6728317
+MA-01-051-1115,Izemmouren,station_tram,arrêt tramway,Station tramway Abdelmoumen,,33.5710237,-7.6259551
+MA-01-051-1115,Izemmouren,aeroport,aéroport,Aéroport international Mohammed V de Casablanca,,33.3702714,-7.5829065
+MA-01-051-1115,Izemmouren,aeroport,aéroport,Aéroport Al Hoceima Cherif Al Idrissi,,35.1787589,-3.8430133
+MA-01-051-1115,Izemmouren,aeroport,aéroport,Aéroport de Benslimane,,33.6527559,-7.228851
+MA-01-051-1303,Ait Youssef Ou Ali,gare,gare,Aït Youssef Ou Ali,,31.983333,-5.766667
+MA-01-051-1303,Ait Youssef Ou Ali,gare,gare,AIT YOUSSEF OU ALI,,35.1672543,-3.8661526
+MA-01-051-1303,Ait Youssef Ou Ali,gare,gare,Ait Youssef Ou Ali,,35.1633974,-3.8960811
+MA-01-051-1303,Ait Youssef Ou Ali,gare,gare,Ctre Ait Youssef Ou Ali,,35.1673609,-3.8578954
+MA-01-051-1303,Ait Youssef Ou Ali,station_tram,station tramway,Ali Yata,,33.591476,-7.569933
+MA-01-051-1303,Ait Youssef Ou Ali,station_tram,station tramway,Station tramway Al Wifaq,,33.5956827,-7.5380157
+MA-01-051-1303,Ait Youssef Ou Ali,station_tram,station tramway,Station Tramway Oasis,,33.5549432,-7.6309509
+MA-01-051-1303,Ait Youssef Ou Ali,station_tram,station tramway,Station tramway Abdelmoumen,,33.5710237,-7.6259551
+MA-01-051-1303,Ait Youssef Ou Ali,station_tram,station tramway,"Station Tramway, Derb Sultan.",,33.5720907,-7.5958624
+MA-01-051-1303,Ait Youssef Ou Ali,station_tram,station tramway,Terminus Tramway Ain Diab,,33.5874824,-7.6808435
+MA-01-051-1303,Ait Youssef Ou Ali,station_tram,arrêt tramway,Ali Yata,,33.591476,-7.569933
+MA-01-051-1303,Ait Youssef Ou Ali,station_tram,arrêt tramway,Station tramway Al Wifaq,,33.5956827,-7.5380157
+MA-01-051-1303,Ait Youssef Ou Ali,station_tram,arrêt tramway,Al wifaq,,33.595686,-7.538122
+MA-01-051-1303,Ait Youssef Ou Ali,station_tram,arrêt tramway,Station Tramway Oasis,,33.5549432,-7.6309509
+MA-01-051-1303,Ait Youssef Ou Ali,station_tram,arrêt tramway,Terminus tramway Parc de la Ligue Arabe,,33.5880563,-7.6219298
+MA-01-051-1303,Ait Youssef Ou Ali,port,port,Aït Youssef Ou Ali,,31.983333,-5.766667
+MA-01-051-1303,Ait Youssef Ou Ali,port,port,Ctre Ait Youssef Ou Ali,,35.1673609,-3.8578954
+MA-01-051-1303,Ait Youssef Ou Ali,aeroport,aéroport,Aéroport international Mohammed V de Casablanca,,33.3702714,-7.5829065
+MA-01-051-1303,Ait Youssef Ou Ali,aeroport,aéroport,Aït Youssef Ou Ali,,31.983333,-5.766667
+MA-01-051-1303,Ait Youssef Ou Ali,aeroport,aéroport,Aéroport de Benslimane,,33.6527559,-7.228851
+MA-01-051-1305,Arbaa Taourirt,gare,gare,Arbiaa Taourirt,,34.9317581,-3.832454
+MA-01-051-1305,Arbaa Taourirt,gare,gare,Gare TAOURIRT,"Intersection boulevard Allal al Fassi, Rue amgala, Taourirt 65800",34.4091875,-3.8981874999999997
+MA-01-051-1305,Arbaa Taourirt,gare,gare,Gare Routière Taourirt,,34.4180245,-2.912705
+MA-01-051-1305,Arbaa Taourirt,gare,gare,Qalâa n' Arbaâ Taourirt قلعة اربعاء تاوريرت ⵔⴼⵓⵙⵉⵏⴰ ⵜⴰⵣⴳⴳⴰⵖⵜ,,34.9365133,-3.829937
+MA-01-051-1305,Arbaa Taourirt,gare,gare,Taourirt,,34.4087685,-2.8982395
+MA-01-051-1305,Arbaa Taourirt,gare,gare ferroviaire,Taourirt,,34.4087685,-2.8982395
+MA-01-051-1305,Arbaa Taourirt,gare,gare ferroviaire,Gare TAOURIRT,,34.4091293,-2.8981335
+MA-01-051-1305,Arbaa Taourirt,gare,gare ferroviaire,Gare Ferroviaire Arbaoua,,34.8918493,-5.9266734
+MA-01-051-1305,Arbaa Taourirt,gare_oncf,gare ONCF,Taourirt,,34.4087685,-2.8982395
+MA-01-051-1305,Arbaa Taourirt,gare_oncf,gare ONCF,Gare TAOURIRT,,34.4091293,-2.8981335
+MA-01-051-1305,Arbaa Taourirt,port,port,Qalâa n' Arbaâ Taourirt قلعة اربعاء تاوريرت ⵔⴼⵓⵙⵉⵏⴰ ⵜⴰⵣⴳⴳⴰⵖⵜ,,34.9365133,-3.829937
+MA-01-051-1305,Arbaa Taourirt,port,port,Arbiaa Taourirt,,34.9317581,-3.832454
+MA-01-051-1305,Arbaa Taourirt,port,port,Port de Casablanca,,33.6037308,-7.5965129
+MA-01-051-1305,Arbaa Taourirt,aeroport,aéroport,Aéroport Al Hoceima Cherif Al Idrissi,,35.1787589,-3.8430133
+MA-01-051-1305,Arbaa Taourirt,aeroport,aéroport,Aéroport International Nador - El Aroui,,34.9928878,-3.0288794
+MA-01-051-1305,Arbaa Taourirt,aeroport,aéroport,Qalâa n' Arbaâ Taourirt قلعة اربعاء تاوريرت ⵔⴼⵓⵙⵉⵏⴰ ⵜⴰⵣⴳⴳⴰⵖⵜ,,34.9365133,-3.829937
+MA-01-051-1323,Tifarouine,gare,gare,Tifarouine,,35.077574,-3.8744391
+MA-01-051-1323,Tifarouine,gare,gare,محطة ولاد زيان,,33.5734841,-7.5863165
+MA-01-051-1323,Tifarouine,gare,gare,Gare routière de Tétouan,,35.5607124,-5.3714857
+MA-01-051-1323,Tifarouine,gare,gare,Gare Tanger Ville,,35.7715294,-5.7859866
+MA-01-051-1323,Tifarouine,gare,gare,Gare routière de Tanger,,35.7289323,-5.8600449
+MA-01-051-1323,Tifarouine,gare,gare,Gare de Kenitra Medina,,34.2649776,-6.5681771
+MA-01-051-1323,Tifarouine,gare,gare,Gare Rabat Ville,,34.0164635,-6.8356942
+MA-01-051-1323,Tifarouine,gare,gare,Gare Rabat Agdal,,34.0021353,-6.855586
+MA-01-051-1323,Tifarouine,gare,gare,Trans Tassaout - Agence Rond point Georges,,33.5535096,-7.6907972
+MA-01-051-1323,Tifarouine,gare,gare ferroviaire,Casa Voyageurs,,33.5896911,-7.5909106
+MA-01-051-1323,Tifarouine,gare,gare ferroviaire,Gare Ferroviaire,,32.2612991,-8.9752592
+MA-01-051-1323,Tifarouine,gare,gare ferroviaire,Témara,,33.9172994,-6.93037
+MA-01-051-1323,Tifarouine,gare_oncf,gare ONCF,Casa Voyageurs,,33.5896911,-7.5909106
+MA-01-051-1323,Tifarouine,gare_oncf,gare ONCF,Gare Casa Voyageurs,,33.589931,-7.5897493
+MA-01-051-1323,Tifarouine,gare_oncf,gare ONCF,Gare BERRECHID,,33.2603876,-7.5921341
+MA-01-051-1323,Tifarouine,station_tram,station tramway,Tramway Station Ibn Tachfine,,33.5808252,-7.5631698
+MA-01-051-1323,Tifarouine,station_tram,station tramway,Station tramway AL Amane,,33.599189,-7.5328755
+MA-01-051-1323,Tifarouine,station_tram,station tramway,"Station Tramway, Derb Sultan.",,33.5720907,-7.5958624
+MA-01-051-1323,Tifarouine,station_tram,station tramway,Ali Yata,,33.591476,-7.569933
+MA-01-051-1323,Tifarouine,station_tram,station tramway,Station tramway Hay rajae,,33.5765868,-7.5483195
+MA-01-051-1323,Tifarouine,station_tram,station tramway,Station Tramway Riviera,,33.5709513,-7.6362222
+MA-01-051-1323,Tifarouine,station_tram,station tramway,Casa Tram SA,,33.578577,-7.515474
+MA-01-051-1323,Tifarouine,station_tram,station tramway,Terminus Tramway Sidi Bernoussi T2,,33.6101211,-7.5098808
+MA-01-051-1323,Tifarouine,station_tram,station tramway,محطة طرامواي دار توزاني station de tramway dar tozani,,33.5934411,-7.6043998
+MA-01-051-1323,Tifarouine,station_tram,station tramway,Terminus Tramway Ain Diab,,33.5874824,-7.6808435
+MA-01-051-1323,Tifarouine,station_tram,station tramway,Station Tramway Marché central,,33.5946426,-7.6124382
+MA-01-051-1323,Tifarouine,station_tram,station tramway,Station Tramway Oasis,,33.5549432,-7.6309509
+MA-01-051-1323,Tifarouine,station_tram,station tramway,"Station Tramway Anoual, Casablanca",,33.5694716,-7.6250691
+MA-01-051-1323,Tifarouine,station_tram,station tramway,Hôpital de Sidi Moumen,,33.576404,-7.517978
+MA-01-051-1323,Tifarouine,station_tram,station tramway,Tramway Lissasfa Terminus.,,33.5354039,-7.6699473
+MA-01-051-1323,Tifarouine,station_tram,station tramway,Sation Tramway Grand Cienture,,33.5904608,-7.5734995
+MA-01-051-1323,Tifarouine,station_tram,station tramway,Station Tramway Zenith,,33.5407642,-7.6428634
+MA-01-051-1323,Tifarouine,station_tram,station tramway,Agence Casa Voyageurs Tram,,33.5899856,-7.5907827
+MA-01-051-1323,Tifarouine,station_tram,arrêt tramway,Tramway Station Ibn Tachfine,,33.5808252,-7.5631698
+MA-01-051-1323,Tifarouine,station_tram,arrêt tramway,Ali Yata,,33.591476,-7.569933
+MA-01-051-1323,Tifarouine,station_tram,arrêt tramway,Station tramway Abdelmoumen,,33.5710237,-7.6259551
+MA-01-051-1323,Tifarouine,station_tram,arrêt tramway,"Station Tramway, Derb Sultan.",,33.5720907,-7.5958624
+MA-01-051-1323,Tifarouine,station_tram,arrêt tramway,Station Tramway Riviera,,33.5709513,-7.6362222
+MA-01-051-1323,Tifarouine,station_tram,arrêt tramway,Terminus Tramway Sidi Bernoussi T2,,33.6101211,-7.5098808
+MA-01-051-1323,Tifarouine,station_tram,arrêt tramway,Station Sidi Moumen Terminus,,33.5872092,-7.5009224
+MA-01-051-1323,Tifarouine,station_tram,arrêt tramway,Casa Tram SA,,33.578577,-7.515474
+MA-01-051-1323,Tifarouine,station_tram,arrêt tramway,Terminus Tramway Ain Diab,,33.5874824,-7.6808435
+MA-01-051-1323,Tifarouine,station_tram,arrêt tramway,Station Tramway Marché central,,33.5946426,-7.6124382
+MA-01-051-1323,Tifarouine,station_tram,arrêt tramway,Station Tramway Oasis,,33.5549432,-7.6309509
+MA-01-051-1323,Tifarouine,station_tram,arrêt tramway,محطة طرامواي دار توزاني station de tramway dar tozani,,33.5934411,-7.6043998
+MA-01-051-1323,Tifarouine,station_tram,arrêt tramway,Hôpital de Sidi Moumen,,33.576404,-7.517978
+MA-01-051-1323,Tifarouine,station_tram,arrêt tramway,"Station Tramway Anoual, Casablanca",,33.5694716,-7.6250691
+MA-01-051-1323,Tifarouine,station_tram,arrêt tramway,Tramway Lissasfa Terminus.,,33.5354039,-7.6699473
+MA-01-051-1323,Tifarouine,station_tram,arrêt tramway,Sation Tramway Grand Cienture,,33.5904608,-7.5734995
+MA-01-051-1323,Tifarouine,station_tram,arrêt tramway,Hay Raja,,33.576612,-7.548226
+MA-01-051-1323,Tifarouine,port,port,Port de Casablanca,,33.6037308,-7.5965129
+MA-01-051-1323,Tifarouine,port,port,Port de Safi Atlantique,,32.1744217,-9.2633267
+MA-01-051-1323,Tifarouine,port,port,Agence Nationale des Ports,,33.5390012,-7.6426445
+MA-01-051-1323,Tifarouine,aeroport,aéroport,Aéroport international Mohammed V de Casablanca,,33.3702714,-7.5829065
+MA-01-051-1323,Tifarouine,aeroport,aéroport,Aéroport de Tétouan,,35.5910917,-5.3310198
+MA-01-051-1323,Tifarouine,aeroport,aéroport,Aéroport de Benslimane,,33.6527559,-7.228851
+MA-01-051-1323,Tifarouine,aeroport,aéroport,Airport Tangier Ibn Batouta,,35.7261039,-5.9129331
+MA-01-051-1323,Tifarouine,aeroport,aéroport,Aéroport Al Hoceima Cherif Al Idrissi,,35.1787589,-3.8430133
+MA-01-051-1313,Imrabten,gare,gare,Ennasim,,33.5173902,-7.6582867
+MA-01-051-1313,Imrabten,gare,gare,Casa Voyageurs,,33.5896911,-7.5909106
+MA-01-051-1313,Imrabten,gare,gare,Casa Port,,33.5994804,-7.6128264
+MA-01-051-1313,Imrabten,gare,gare ferroviaire,Ennasim,,33.5173902,-7.6582867
+MA-01-051-1313,Imrabten,gare,gare ferroviaire,Casa Voyageurs,,33.5896911,-7.5909106
+MA-01-051-1313,Imrabten,gare,gare ferroviaire,Terminus Tramway Ain Diab,,33.5874824,-7.6808435
+MA-01-051-1313,Imrabten,gare,gare ferroviaire,Casa Port,,33.5994804,-7.6128264
+MA-01-051-1313,Imrabten,gare,gare ferroviaire,Gare BERRECHID,,33.2603876,-7.5921341
+MA-01-051-1313,Imrabten,gare_oncf,gare ONCF,Casa Voyageurs,,33.5896911,-7.5909106
+MA-01-051-1313,Imrabten,gare_oncf,gare ONCF,Gare Casa Voyageurs,,33.589931,-7.5897493
+MA-01-051-1313,Imrabten,gare_oncf,gare ONCF,Gare BERRECHID,,33.2603876,-7.5921341
+MA-01-051-1313,Imrabten,gare_oncf,gare ONCF,Gare Rabat Ville,,34.0164635,-6.8356942
+MA-01-051-1313,Imrabten,station_tram,station tramway,Station tramway AL Amane,,33.599189,-7.5328755
+MA-01-051-1313,Imrabten,station_tram,station tramway,Station tramway Mdakra.,,33.5812928,-7.5633331
+MA-01-051-1313,Imrabten,station_tram,station tramway,Station tramway Hay rajae,,33.5765868,-7.5483195
+MA-01-051-1313,Imrabten,station_tram,station tramway,"Station Tramway, Derb Sultan.",,33.5720907,-7.5958624
+MA-01-051-1313,Imrabten,station_tram,station tramway,Terminus Tramway Ain Diab,,33.5874824,-7.6808435
+MA-01-051-1313,Imrabten,station_tram,station tramway,Terminus Tramway Sidi Moumen.,,33.5869864,-7.5014597
+MA-01-051-1313,Imrabten,station_tram,station tramway,"Station Tramway Anoual, Casablanca",,33.5694716,-7.6250691
+MA-01-051-1313,Imrabten,station_tram,station tramway,Station Tramway Panoramique,,33.5471975,-7.6318858
+MA-01-051-1313,Imrabten,station_tram,station tramway,Terminus tramway Parc de la Ligue Arabe,,33.5880563,-7.6219298
+MA-01-051-1313,Imrabten,station_tram,station tramway,Casa Tram SA,,33.578577,-7.515474
+MA-01-051-1313,Imrabten,station_tram,station tramway,Centre maintenance Tramway,,33.6090126,-7.5092267
+MA-01-051-1313,Imrabten,station_tram,station tramway,Al Amane,,33.599183,-7.532944
+MA-01-051-1313,Imrabten,station_tram,arrêt tramway,Station tramway AL Amane,,33.599189,-7.5328755
+MA-01-051-1313,Imrabten,station_tram,arrêt tramway,Station Tramway Abi dar el ghafari,,33.6067212,-7.5184739
+MA-01-051-1313,Imrabten,station_tram,arrêt tramway,Terminus Tramway Ain Diab,,33.5874824,-7.6808435
+MA-01-051-1313,Imrabten,station_tram,arrêt tramway,Station Sidi Moumen Terminus,,33.5872092,-7.5009224
+MA-01-051-1313,Imrabten,station_tram,arrêt tramway,Ali Yata,,33.591476,-7.569933
+MA-01-051-1313,Imrabten,station_tram,arrêt tramway,"Station Tramway, Derb Sultan.",,33.5720907,-7.5958624
+MA-01-051-1313,Imrabten,station_tram,arrêt tramway,Terminus tramway Parc de la Ligue Arabe,,33.5880563,-7.6219298
+MA-01-051-1313,Imrabten,station_tram,arrêt tramway,Station Tramway Panoramique,,33.5471975,-7.6318858
+MA-01-051-1313,Imrabten,station_tram,arrêt tramway,Al Amane,,33.599183,-7.532944
+MA-01-051-1313,Imrabten,station_tram,arrêt tramway,"Station Tramway Anoual, Casablanca",,33.5694716,-7.6250691
+MA-01-051-1313,Imrabten,station_tram,arrêt tramway,Centre maintenance Tramway,,33.6090126,-7.5092267
+MA-01-051-1313,Imrabten,station_tram,arrêt tramway,Ennassim,,33.584639,-7.504737
+MA-01-051-1313,Imrabten,station_tram,arrêt tramway,Panoramique,,33.547339,-7.631964
+MA-01-051-1313,Imrabten,station_tram,arrêt tramway,Croisement Abd El Moumen,,33.56967,-7.62602
+MA-01-051-1313,Imrabten,station_tram,arrêt tramway,Agence Casa Voyageurs Tram,,33.5899856,-7.5907827
+MA-01-051-1313,Imrabten,port,port,Port de Casablanca,,33.6037308,-7.5965129
+MA-01-051-1313,Imrabten,port,port,Agence Nationale des Ports,,33.5390012,-7.6426445
+MA-01-051-1317,Louta,gare,gare ferroviaire,Aïn Sebaâ,,33.6084997,-7.5241744
+MA-01-051-1317,Louta,gare,gare ferroviaire,Casa Voyageurs,,33.5896911,-7.5909106
+MA-01-051-1317,Louta,gare,gare ferroviaire,Gare BOUSKOURA,,33.4610823,-7.6520422
+MA-01-051-1317,Louta,gare,gare ferroviaire,Casa Port,,33.5994804,-7.6128264
+MA-01-051-1317,Louta,gare,gare ferroviaire,Gare Ferroviaire Laassilate,,33.3644512,-7.7939308
+MA-01-051-1317,Louta,gare_oncf,gare ONCF,Casa Voyageurs,,33.5896911,-7.5909106
+MA-01-051-1317,Louta,gare_oncf,gare ONCF,Gare ONCF de L Oasis_,,33.555019,-7.631099
+MA-01-051-1317,Louta,gare_oncf,gare ONCF,Gare ONCF de L Oasis,,33.5548581,-7.6308682
+MA-01-051-1317,Louta,gare_oncf,gare ONCF,Gare Casa Voyageurs,,33.589931,-7.5897493
+MA-01-051-1317,Louta,gare_oncf,gare ONCF,Casa voyageurs,,33.5901061,-7.5900893
+MA-01-051-1317,Louta,gare_oncf,gare ONCF,Gare CASA PORT,,33.5992484,-7.6126231
+MA-01-051-1317,Louta,gare_oncf,gare ONCF,Gare CASA OASIS,,33.5547245,-7.6315443
+MA-01-051-1317,Louta,gare_oncf,gare ONCF,Gare CASA VOYAGEURS,,33.5897487,-7.5909101
+MA-01-051-1317,Louta,gare_oncf,gare ONCF,L'Oasis,,33.5547995,-7.6315469
+MA-01-051-1317,Louta,station_tram,station tramway,Station tramway Al Wifaq,,33.5956827,-7.5380157
+MA-01-051-1317,Louta,station_tram,station tramway,Ali Yata,,33.591476,-7.569933
+MA-01-051-1317,Louta,station_tram,station tramway,Station tramway AL Amane,,33.599189,-7.5328755
+MA-01-051-1317,Louta,station_tram,station tramway,Station Tramway Attacharouk,,33.5729291,-7.5241602
+MA-01-051-1317,Louta,station_tram,station tramway,Tramway Station Ibn Tachfine,,33.5808252,-7.5631698
+MA-01-051-1317,Louta,station_tram,station tramway,Station tramway Mdakra.,,33.5812928,-7.5633331
+MA-01-051-1317,Louta,station_tram,station tramway,Station Tramway Les Hôpitaux,,33.5800013,-7.6248919
+MA-01-051-1317,Louta,station_tram,station tramway,Station tramway Hay rajae,,33.5765868,-7.5483195
+MA-01-051-1317,Louta,station_tram,station tramway,"Station Tramway, Derb Sultan.",,33.5720907,-7.5958624
+MA-01-051-1317,Louta,station_tram,station tramway,Station tramway Abdelmoumen,,33.5710237,-7.6259551
+MA-01-051-1317,Louta,station_tram,station tramway,Casa Tram SA,,33.578577,-7.515474
+MA-01-051-1317,Louta,station_tram,station tramway,Terminus Tramway Sidi Moumen.,,33.5869864,-7.5014597
+MA-01-051-1317,Louta,station_tram,station tramway,Station tramway faculté de médecine,,33.5746867,-7.6257811
+MA-01-051-1317,Louta,station_tram,station tramway,Station Casa Tramway CHTAÏBA,,33.565234,-7.5709326
+MA-01-051-1317,Louta,station_tram,station tramway,Station Tramway Marché central,,33.5946426,-7.6124382
+MA-01-051-1317,Louta,station_tram,station tramway,.Station Tramway Hay Adil,,33.5793079,-7.5681257
+MA-01-051-1317,Louta,station_tram,station tramway,Tramway Lissasfa Terminus.,,33.5354039,-7.6699473
+MA-01-051-1317,Louta,station_tram,station tramway,"Station Tramway Anoual, Casablanca",,33.5694716,-7.6250691
+MA-01-051-1317,Louta,station_tram,station tramway,Station Tramway La Résistance.,,33.5934653,-7.6033186
+MA-01-051-1317,Louta,station_tram,station tramway,Terminus Tramway Sidi Bernoussi T2,,33.6101211,-7.5098808
+MA-01-051-1317,Louta,station_tram,station tramway,Tramway Station | Casa Voyageurs,,33.5906074,-7.5923738
+MA-01-051-1317,Louta,station_tram,station tramway,Station Tramway Oasis,,33.5549432,-7.6309509
+MA-01-051-1317,Louta,station_tram,station tramway,Terminus Tramway Sidi Bernoussi T2,,33.6101211,-7.5098808
+MA-01-051-1317,Louta,station_tram,station tramway,Tramway Station Place Sraghna,,33.5695633,-7.6022479
+MA-01-051-1317,Louta,station_tram,station tramway,Station Tramway Zenith,,33.5407642,-7.6428634
+MA-01-051-1317,Louta,station_tram,station tramway,Station Sidi Moumen Terminus,,33.5872092,-7.5009224
+MA-01-051-1317,Louta,station_tram,station tramway,Tramway station Mohamed ZERKTOUNI,,33.59267,-7.6086934
+MA-01-051-1317,Louta,station_tram,station tramway,Hôpital de Sidi Moumen,,33.576404,-7.517978
+MA-01-051-1317,Louta,station_tram,station tramway,Station Tramway Hay El Farah.,,33.57167,-7.5863937
+MA-01-051-1317,Louta,station_tram,station tramway,Lissasfa Terminus,,33.535258,-7.669981
+MA-01-051-1317,Louta,station_tram,station tramway,Hay Raja,,33.576612,-7.548226
+MA-01-051-1317,Louta,station_tram,station tramway,Station Tramway Casa Sud,,33.5420363,-7.6509341
+MA-01-051-1317,Louta,station_tram,arrêt tramway,Ali Yata,,33.591476,-7.569933
+MA-01-051-1317,Louta,station_tram,arrêt tramway,Al wifaq,,33.595686,-7.538122
+MA-01-051-1317,Louta,station_tram,arrêt tramway,Tramway Station Ibn Tachfine,,33.5808252,-7.5631698
+MA-01-051-1317,Louta,station_tram,arrêt tramway,Station tramway AL Amane,,33.599189,-7.5328755
+MA-01-051-1317,Louta,station_tram,arrêt tramway,Casa Tram SA,,33.578577,-7.515474
+MA-01-051-1317,Louta,station_tram,arrêt tramway,Station tramway Abdelmoumen,,33.5710237,-7.6259551
+MA-01-051-1317,Louta,station_tram,arrêt tramway,Station Tramway Les Hôpitaux,,33.5800013,-7.6248919
+MA-01-051-1317,Louta,station_tram,arrêt tramway,Terminus Tramway Sidi Bernoussi T2,,33.6101211,-7.5098808
+MA-01-051-1317,Louta,station_tram,arrêt tramway,Station Casa Tramway CHTAÏBA,,33.565234,-7.5709326
+MA-01-051-1317,Louta,station_tram,arrêt tramway,Station tramway faculté de médecine,,33.5746867,-7.6257811
+MA-01-051-1317,Louta,station_tram,arrêt tramway,Station Tramway Marché central,,33.5946426,-7.6124382
+MA-01-051-1317,Louta,station_tram,arrêt tramway,"Station Tramway, Derb Sultan.",,33.5720907,-7.5958624
+MA-01-051-1317,Louta,station_tram,arrêt tramway,Station tramway Hay rajae,,33.5765868,-7.5483195
+MA-01-051-1317,Louta,station_tram,arrêt tramway,Terminus tramway Parc de la Ligue Arabe,,33.5880563,-7.6219298
+MA-01-051-1317,Louta,station_tram,arrêt tramway,Tramway Lissasfa Terminus.,,33.5354039,-7.6699473
+MA-01-051-1317,Louta,station_tram,arrêt tramway,Station Tramway La Résistance.,,33.5934653,-7.6033186
+MA-01-051-1317,Louta,station_tram,arrêt tramway,Tramway Station | Casa Voyageurs,,33.5906074,-7.5923738
+MA-01-051-1317,Louta,station_tram,arrêt tramway,"Station Tramway Anoual, Casablanca",,33.5694716,-7.6250691
+MA-01-051-1317,Louta,station_tram,arrêt tramway,Station Sidi Moumen Terminus,,33.5872092,-7.5009224
+MA-01-051-1317,Louta,station_tram,arrêt tramway,Station Tramway Riviera,,33.5709513,-7.6362222
+MA-01-051-1317,Louta,station_tram,arrêt tramway,"Station Tramway Anoual, Casablanca",,33.5694716,-7.6250691
+MA-01-051-1317,Louta,station_tram,arrêt tramway,Laymoune,,33.540164,-7.666361
+MA-01-051-1317,Louta,station_tram,arrêt tramway,Station Tramway Oasis,,33.5549432,-7.6309509
+MA-01-051-1317,Louta,station_tram,arrêt tramway,Tramway station Mohamed ZERKTOUNI,,33.59267,-7.6086934
+MA-01-051-1317,Louta,station_tram,arrêt tramway,Station Sidi Moumen Terminus,,33.5872092,-7.5009224
+MA-01-051-1317,Louta,station_tram,arrêt tramway,Station tramway Hay rajae,,33.5765868,-7.5483195
+MA-01-051-1317,Louta,station_tram,arrêt tramway,Bahmad,,33.5946858,-7.5866121
+MA-01-051-1317,Louta,station_tram,arrêt tramway,Station Tramway Casa Sud,,33.5420363,-7.6509341
+MA-01-051-1317,Louta,station_tram,arrêt tramway,Sation Tramway Grand Cienture,,33.5904608,-7.5734995
+MA-01-051-1317,Louta,station_tram,arrêt tramway,Parc de la ligue arabe Terminus,,33.587935,-7.621748
+MA-01-051-1317,Louta,station_tram,arrêt tramway,Bd Mohammed VI,,33.543522,-7.581526
+MA-01-051-1317,Louta,station_tram,arrêt tramway,Les Hôpitaux,,33.579969,-7.624865
+MA-01-051-1317,Louta,station_tram,arrêt tramway,Cité De L'air,,33.5683309,-7.6643116
+MA-01-051-1317,Louta,station_tram,arrêt tramway,Agence Casa Voyageurs Tram,,33.5899856,-7.5907827
+MA-01-051-1317,Louta,station_tram,arrêt tramway,Oulmes Terminus,,33.57153,-7.64869
+MA-01-051-1317,Louta,station_tram,arrêt tramway,Mohammed Bouziane,,33.563561,-7.554288
+MA-01-051-1317,Louta,station_tram,arrêt tramway,Madame Loula,,33.5679318,-7.7079427
+MA-01-051-1317,Louta,station_tram,arrêt tramway,Ain Diab Plage Terminus,,33.587608,-7.68095
+MA-01-051-1317,Louta,station_tram,arrêt tramway,Mohammed Zerktouni,,33.58502,-7.606005
+MA-01-051-1317,Louta,station_tram,arrêt tramway,Hay Tissir,,33.572387,-7.580565
+MA-01-051-1317,Louta,station_tram,arrêt tramway,Salmia 2 Terminus,,33.53715,-7.55083
+MA-01-051-1317,Louta,station_tram,arrêt tramway,Casa Voyageurs,,33.59062,-7.592358
+MA-01-051-1317,Louta,station_tram,arrêt tramway,Oued Laou,,33.5599378,-7.6746676
+MA-01-051-1319,Nekkour,gare,gare,Gare BOUSKOURA,,33.4610823,-7.6520422
+MA-01-051-1319,Nekkour,gare,gare,Casa Voyageurs,,33.5896911,-7.5909106
+MA-01-051-1319,Nekkour,gare,gare,Bouskoura,,33.4611894,-7.6518635
+MA-01-051-1319,Nekkour,gare,gare,Casa Port,,33.5994804,-7.6128264
+MA-01-051-1319,Nekkour,gare,gare,L'Oasis,,33.5547995,-7.6315469
+MA-01-051-1319,Nekkour,gare,gare,Gare ONCF Aéroport Mohamed V,,33.3737827,-7.579692
+MA-01-051-1319,Nekkour,gare,gare ferroviaire,Gare BOUSKOURA,,33.4610823,-7.6520422
+MA-01-051-1319,Nekkour,gare,gare ferroviaire,Casa Voyageurs,,33.5896911,-7.5909106
+MA-01-051-1319,Nekkour,gare,gare ferroviaire,Casa Port,,33.5994804,-7.6128264
+MA-01-051-1319,Nekkour,gare,gare ferroviaire,Gare BERRECHID,,33.2603876,-7.5921341
+MA-01-051-1319,Nekkour,gare,gare ferroviaire,Gare de Kenitra Medina,,34.2649776,-6.5681771
+MA-01-051-1319,Nekkour,gare,gare ferroviaire,Gare de Kénitra,,34.2522819,-6.5803275
+MA-01-051-1319,Nekkour,gare_oncf,gare ONCF,Casa Port,,33.5994804,-7.6128264
+MA-01-051-1319,Nekkour,gare_oncf,gare ONCF,Casa Voyageurs,,33.5896911,-7.5909106
+MA-01-051-1319,Nekkour,gare_oncf,gare ONCF,Gare BERRECHID,,33.2603876,-7.5921341
+MA-01-051-1319,Nekkour,station_tram,station tramway,Station tramway Mdakra.,,33.5812928,-7.5633331
+MA-01-051-1319,Nekkour,station_tram,station tramway,Station Tramway Attacharouk,,33.5729291,-7.5241602
+MA-01-051-1319,Nekkour,station_tram,station tramway,Station Casa Tramway NIL,,33.5664919,-7.5647601
+MA-01-051-1319,Nekkour,station_tram,station tramway,"Station Tramway Anoual, Casablanca",,33.5694716,-7.6250691
+MA-01-051-1319,Nekkour,station_tram,station tramway,Station Tramway Mekka,,33.5581982,-7.6296424
+MA-01-051-1319,Nekkour,station_tram,station tramway,Station tramway Abdelmoumen,,33.5710237,-7.6259551
+MA-01-051-1319,Nekkour,station_tram,station tramway,Station Tramway Riviera,,33.5709513,-7.6362222
+MA-01-051-1319,Nekkour,station_tram,station tramway,Station Sidi Moumen Terminus,,33.5872092,-7.5009224
+MA-01-051-1319,Nekkour,station_tram,station tramway,Station Tramway Les Hôpitaux,,33.5800013,-7.6248919
+MA-01-051-1319,Nekkour,station_tram,station tramway,"Station Tramway, Derb Sultan.",,33.5720907,-7.5958624
+MA-01-051-1319,Nekkour,station_tram,station tramway,Station Tramway Oasis,,33.5549432,-7.6309509
+MA-01-051-1319,Nekkour,station_tram,station tramway,Panoramique,,33.547339,-7.631964
+MA-01-051-1319,Nekkour,station_tram,station tramway,La Gare Mohammed Dyouri,,33.5937206,-7.6084051
+MA-01-051-1319,Nekkour,station_tram,station tramway,Attacharouk,,33.574052,-7.524465
+MA-01-051-1319,Nekkour,station_tram,arrêt tramway,Station Tramway Marché central,,33.5946426,-7.6124382
+MA-01-051-1319,Nekkour,station_tram,arrêt tramway,Station Sidi Moumen Terminus,,33.5872092,-7.5009224
+MA-01-051-1319,Nekkour,station_tram,arrêt tramway,Station Tramway Panoramique,,33.5471975,-7.6318858
+MA-01-051-1319,Nekkour,station_tram,arrêt tramway,Station Tramway Zenith,,33.5407642,-7.6428634
+MA-01-051-1319,Nekkour,station_tram,arrêt tramway,"Station Tramway Anoual, Casablanca",,33.5694716,-7.6250691
+MA-01-051-1319,Nekkour,station_tram,arrêt tramway,Panoramique,,33.547339,-7.631964
+MA-01-051-1319,Nekkour,station_tram,arrêt tramway,Station Tramway Riviera,,33.5709513,-7.6362222
+MA-01-051-1319,Nekkour,station_tram,arrêt tramway,Attacharouk,,33.574052,-7.524465
+MA-01-051-1319,Nekkour,station_tram,arrêt tramway,Station tramway Abdelmoumen,,33.5710237,-7.6259551
+MA-01-051-1319,Nekkour,station_tram,arrêt tramway,Station Tramway Oasis,,33.5549432,-7.6309509
+MA-01-051-1319,Nekkour,station_tram,arrêt tramway,"Station Tramway, Derb Sultan.",,33.5720907,-7.5958624
+MA-01-051-1319,Nekkour,station_tram,arrêt tramway,Agence Casa Voyageurs Tram,,33.5899856,-7.5907827
+MA-01-051-1319,Nekkour,station_tram,arrêt tramway,Omar El Khayam Terminus,,33.54028,-7.66692
+MA-01-051-1319,Nekkour,station_tram,arrêt tramway,Salmia 2 Terminus,,33.53715,-7.55083
+MA-01-051-1319,Nekkour,station_tram,arrêt tramway,Oulmes Terminus,,33.57153,-7.64869
+MA-01-051-1319,Nekkour,port,port,Port de Casablanca,,33.6037308,-7.5965129
+MA-01-051-1319,Nekkour,port,port,Agence Nationale des Ports,,33.5390012,-7.6426445
+MA-01-051-1319,Nekkour,aeroport,aéroport,Aéroport international Mohammed V de Casablanca,,33.3702714,-7.5829065
+MA-01-051-1319,Nekkour,aeroport,aéroport,Aéroport International Nador - El Aroui,,34.9928878,-3.0288794
+MA-01-051-1319,Nekkour,aeroport,aéroport,Aéroport international Marrakech-Ménara,,31.6017479,-8.0257112
+MA-01-051-1319,Nekkour,aeroport,aéroport,Aéroport de Benslimane,,33.6527559,-7.228851
+MA-01-051-1319,Nekkour,aeroport,aéroport,Aéroport d'Essaouira-Mogador,,31.4032305,-9.6883378
+MA-01-051-1319,Nekkour,aeroport,aéroport,Aéroport de Béni Mellal,,32.3967064,-6.3277034
+MA-01-051-1319,Nekkour,aeroport,aéroport,Aéroport de Rabat-Salé,,34.0502967,-6.7495096
+MA-01-051-1319,Nekkour,aeroport,aéroport,Aéroport Al Hoceima Cherif Al Idrissi,,35.1787589,-3.8430133
+MA-01-051-1311,Chakrane,gare,gare,Casa Voyageurs,,33.5896911,-7.5909106
+MA-01-051-1311,Chakrane,gare,gare,محطة ولاد زيان,,33.5734841,-7.5863165
+MA-01-051-1311,Chakrane,gare,gare,Ennasim,,33.5173902,-7.6582867
+MA-01-051-1311,Chakrane,gare,gare,Casa Port,,33.5994804,-7.6128264
+MA-01-051-1311,Chakrane,gare,gare,Gare BERRECHID,,33.2603876,-7.5921341
+MA-01-051-1311,Chakrane,gare,gare ferroviaire,Casa Voyageurs,,33.5896911,-7.5909106
+MA-01-051-1311,Chakrane,gare,gare ferroviaire,Ennasim,,33.5173902,-7.6582867
+MA-01-051-1311,Chakrane,gare,gare ferroviaire,Casa Port,,33.5994804,-7.6128264
+MA-01-051-1311,Chakrane,gare,gare ferroviaire,Ennassim,,33.5127042,-7.66057
+MA-01-051-1311,Chakrane,gare,gare ferroviaire,Témara,,33.9172994,-6.93037
+MA-01-051-1311,Chakrane,gare,gare ferroviaire,Gare de Kenitra Medina,,34.2649776,-6.5681771
+MA-01-051-1311,Chakrane,gare,gare ferroviaire,Gare TEMARA,,33.9171243,-6.9306535
+MA-01-051-1311,Chakrane,gare,gare ferroviaire,Bouznika,,33.7901016,-7.1619106
+MA-01-051-1311,Chakrane,gare_oncf,gare ONCF,Casa Voyageurs,,33.5896911,-7.5909106
+MA-01-051-1311,Chakrane,gare_oncf,gare ONCF,Gare Casa Voyageurs,,33.589931,-7.5897493
+MA-01-051-1311,Chakrane,gare_oncf,gare ONCF,Gare BERRECHID,,33.2603876,-7.5921341

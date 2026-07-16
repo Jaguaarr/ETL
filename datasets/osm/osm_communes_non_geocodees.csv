@@ -1,0 +1,120 @@
+commune_code,commune_nom,code_province,n_areas_found,reason
+MA-01-051-1303,Ait Youssef Ou Ali,MA-01-051,0,aucune_relation_administrative_trouvee
+MA-01-051-1311,Chakrane,MA-01-051,0,aucune_relation_administrative_trouvee
+MA-01-051-0923,Taghzout,MA-01-051,2,nom_ambigu_plusieurs_relations
+MA-01-051-1303,Ait Youssef Ou Ali,MA-01-051,0,commune_absente_du_geojson
+MA-01-051-0727,Zarkt,MA-01-051,0,commune_absente_du_geojson
+MA-01-151-0917,M'tioua,MA-01-151,0,commune_absente_du_geojson
+MA-01-151-0101,Chefchaouen,MA-01-151,0,commune_absente_du_geojson
+MA-01-151-0621,Oued Malha,MA-01-151,0,commune_absente_du_geojson
+MA-01-331-1103,Oulad Ouchih,MA-01-331,0,commune_absente_du_geojson
+MA-01-331-0701,Boujedyane,MA-01-331,0,commune_absente_du_geojson
+MA-01-405-0701,Bni Quolla,MA-01-405,0,commune_absente_du_geojson
+MA-01-405-1309,Ouannana,MA-01-405,0,commune_absente_du_geojson
+MA-01-511-0109,Gueznaia,MA-01-511,0,commune_absente_du_geojson
+MA-01-511-0105,Mghogha,MA-01-511,0,commune_absente_du_geojson
+MA-01-511-0106,Souani,MA-01-511,0,commune_absente_du_geojson
+MA-01-511-0107,Médina,MA-01-511,0,commune_absente_du_geojson
+MA-01-511-0313,Sidi Lyamani,MA-01-511,0,commune_absente_du_geojson
+MA-01-511-0315,Had Al Gharbia,MA-01-511,0,commune_absente_du_geojson
+MA-01-511-0303,Aquouass Briech,MA-01-511,0,commune_absente_du_geojson
+MA-01-511-0519,Hjar Ennhal,MA-01-511,0,commune_absente_du_geojson
+MA-01-511-0505,Sebt Azzinate,MA-01-511,0,commune_absente_du_geojson
+MA-01-571-0505,Al Oued,MA-01-571,0,commune_absente_du_geojson
+MA-01-571-0111,Tétouan,MA-01-571,0,commune_absente_du_geojson
+MA-01-571-0107,Oued Laou,MA-01-571,0,commune_absente_du_geojson
+MA-01-573-0100,Sebta,MA-01-573,0,commune_absente_du_geojson
+MA-01-573-0101,Fnideq,MA-01-573,0,commune_absente_du_geojson
+MA-01-573-0109,Belyounech,MA-01-573,0,commune_absente_du_geojson
+MA-02-113-0129,Sidi Slimane Echcharaa,MA-02-113,0,commune_absente_du_geojson
+MA-02-113-0505,Chouihia,MA-02-113,0,commune_absente_du_geojson
+MA-02-167-1709,Mtalssa,MA-02-167,0,commune_absente_du_geojson
+MA-02-251-0313,Ain Chair,MA-02-251,0,commune_absente_du_geojson
+MA-02-275-0913,Ras Asfour,MA-02-275,0,commune_absente_du_geojson
+MA-02-275-0513,Ouled Ghziyel,MA-02-275,0,commune_absente_du_geojson
+MA-02-275-0515,Ouled Sidi Abdelhakem,MA-02-275,0,commune_absente_du_geojson
+MA-02-275-0501,Bni Mathar,MA-02-275,0,commune_absente_du_geojson
+MA-02-275-0117,Jerada,MA-02-275,0,commune_absente_du_geojson
+MA-02-381-0707,Bni Oukil Oulad M'hand,MA-02-381,0,commune_absente_du_geojson
+MA-02-381-0100,Melilia,MA-02-381,0,commune_absente_du_geojson
+MA-02-411-0119,Naima,MA-02-411,0,commune_absente_du_geojson
+MA-02-411-0123,Oujda,MA-02-411,0,commune_absente_du_geojson
+MA-02-533-0901,Ahl Oued Za,MA-02-533,0,commune_absente_du_geojson
+MA-02-533-0319,Sidi Lahsen,MA-02-533,0,commune_absente_du_geojson
+MA-02-533-0315,Ouled M'hamed,MA-02-533,0,commune_absente_du_geojson
+MA-02-533-0317,Sidi Ali Bel Quassem,MA-02-533,0,commune_absente_du_geojson
+MA-03-061-0103,Al Machouar-Stinia,MA-03-061,0,commune_absente_du_geojson
+MA-03-061-0109,My Idriss Zerhoun,MA-03-061,0,commune_absente_du_geojson
+MA-03-061-0101,Meknès,MA-03-061,0,commune_absente_du_geojson
+MA-03-061-0302,Ain Karma-Oued Rommane,MA-03-061,0,commune_absente_du_geojson
+MA-03-061-0711,Sidi Abdellah Al Khayat,MA-03-061,0,commune_absente_du_geojson
+MA-03-061-0507,Oued Jdida,MA-03-061,0,commune_absente_du_geojson
+MA-03-061-0509,Sidi Slimane Moul Al Kifane,MA-03-061,0,commune_absente_du_geojson
+MA-03-061-0505,M'haya,MA-03-061,0,commune_absente_du_geojson
+MA-03-061-0705,Mrhassiyine,MA-03-061,0,commune_absente_du_geojson
+MA-03-061-0707,N'zalat Bni Amar,MA-03-061,0,commune_absente_du_geojson
+MA-03-171-0107,Sabaa Aiyoun,MA-03-171,0,commune_absente_du_geojson
+MA-03-231-0111,El Mariniyine,MA-03-231,0,commune_absente_du_geojson
+MA-03-231-0109,Jnan El Ouard,MA-03-231,0,commune_absente_du_geojson
+MA-03-231-0103,Méchouar-Fès-El Jadid,MA-03-231,0,commune_absente_du_geojson
+MA-03-271-0305,Oued Ifrane,MA-03-271,0,commune_absente_du_geojson
+MA-03-451-0309,Irhzrane,MA-03-451,0,commune_absente_du_geojson
+MA-03-451-0105,Immouzzer-Kandar,MA-03-451,0,commune_absente_du_geojson
+MA-03-531-0313,Sidi Haj M'hamed,MA-03-531,0,commune_absente_du_geojson
+MA-03-531-0317,Sidi Yahia Bni Zeroual,MA-03-531,0,commune_absente_du_geojson
+MA-03-531-0309,Ourtzarh,MA-03-531,0,commune_absente_du_geojson
+MA-03-531-0921,Ras El Oued,MA-03-531,0,commune_absente_du_geojson
+MA-03-531-0913,Oued Jemaa,MA-03-531,0,commune_absente_du_geojson
+MA-03-531-0103,Karia Ba Mohamed,MA-03-531,0,commune_absente_du_geojson
+MA-03-531-0105,Taounate,MA-03-531,0,commune_absente_du_geojson
+MA-03-531-0107,Thar Es-Souk,MA-03-531,0,commune_absente_du_geojson
+MA-03-531-0101,Rhafsai,MA-03-531,0,commune_absente_du_geojson
+MA-03-531-0505,Rhouazi,MA-03-531,0,commune_absente_du_geojson
+MA-03-561-1103,Brarha,MA-03-561,0,commune_absente_du_geojson
+MA-03-561-1311,Meknassa Al Gharbia,MA-03-561,0,commune_absente_du_geojson
+MA-03-561-0909,Smia,MA-03-561,0,commune_absente_du_geojson
+MA-03-561-0111,Taza,MA-03-561,0,commune_absente_du_geojson
+MA-04-281-0511,Sidi Mohamed Benmansour,MA-04-281,0,commune_absente_du_geojson
+MA-04-281-0707,Oued El Makhazine,MA-04-281,0,commune_absente_du_geojson
+MA-04-281-0105,Mehdya,MA-04-281,0,commune_absente_du_geojson
+MA-04-281-0101,Kénitra,MA-04-281,0,commune_absente_du_geojson
+MA-04-281-0111,Souk El Arbaa,MA-04-281,0,commune_absente_du_geojson
+MA-04-281-0311,Ouled Slama,MA-04-281,0,commune_absente_du_geojson
+MA-04-281-0901,Bahhara Ouled Ayad,MA-04-281,0,commune_absente_du_geojson
+MA-04-291-0715,My Driss Aghbal,MA-04-291,0,commune_absente_du_geojson
+MA-04-291-0919,Ait Ali Ou Lahcen,MA-04-291,0,commune_absente_du_geojson
+MA-04-291-0911,M'qam Tolba,MA-04-291,0,commune_absente_du_geojson
+MA-04-291-0905,Ait Bouyahia El Hajjama,MA-04-291,0,commune_absente_du_geojson
+MA-04-291-0909,Khemis Sidi Yahya,MA-04-291,0,commune_absente_du_geojson
+MA-04-291-0902,Ain Johra-Sidi Boukhalkhal,MA-04-291,0,commune_absente_du_geojson
+MA-04-291-0317,Sidi El Rhandour,MA-04-291,0,commune_absente_du_geojson
+MA-04-421-0105,Hassan,MA-04-421,0,commune_absente_du_geojson
+MA-04-421-0106,Souissi,MA-04-421,0,commune_absente_du_geojson
+MA-04-441-0105,Bettana,MA-04-441,0,commune_absente_du_geojson
+MA-04-441-0107,Layayda,MA-04-441,0,commune_absente_du_geojson
+MA-04-441-0109,Tabriquet,MA-04-441,0,commune_absente_du_geojson
+MA-04-441-0103,Bab Lamrissa,MA-04-441,0,commune_absente_du_geojson
+MA-04-441-0113,Ameur,MA-04-441,0,commune_absente_du_geojson
+MA-04-481-0911,Zaggota,MA-04-481,0,commune_absente_du_geojson
+MA-04-481-1105,Rmilat,MA-04-481,0,commune_absente_du_geojson
+MA-04-481-0313,Sidi Ahmed Benaissa,MA-04-481,0,commune_absente_du_geojson
+MA-04-481-0315,Sidi Ameur Al Hadi,MA-04-481,0,commune_absente_du_geojson
+MA-04-491-0511,Ouled Ben Hammadi,MA-04-491,0,commune_absente_du_geojson
+MA-04-491-0513,Ouled H'cine,MA-04-491,0,commune_absente_du_geojson
+MA-04-491-0509,M'saada,MA-04-491,0,commune_absente_du_geojson
+MA-04-491-0109,Sidi Yahia El Gharb,MA-04-491,0,commune_absente_du_geojson
+MA-04-491-0317,Ameur Chamalia,MA-04-491,0,commune_absente_du_geojson
+MA-04-501-0503,Mers El Kheir,MA-04-501,0,commune_absente_du_geojson
+MA-05-081-0915,Ouaouizeght,MA-05-081,0,commune_absente_du_geojson
+MA-05-081-1101,Afourar,MA-05-081,0,commune_absente_du_geojson
+MA-05-081-1103,Bni A'yat,MA-05-081,0,commune_absente_du_geojson
+MA-05-091-0305,Ouled M'barek,MA-05-091,0,commune_absente_du_geojson
+MA-05-091-0307,Ouled Yaich,MA-05-091,0,commune_absente_du_geojson
+MA-05-091-0303,Ouled Gnaou,MA-05-091,0,commune_absente_du_geojson
+MA-05-091-1103,Ouled Youssef,MA-05-091,0,commune_absente_du_geojson
+MA-05-091-1105,Ouled Said Loued,MA-05-091,0,commune_absente_du_geojson
+MA-05-255-1107,Ouled Nacer,MA-05-255,0,commune_absente_du_geojson
+MA-05-255-0901,Khalfia,MA-05-255,0,commune_absente_du_geojson
+MA-05-255-0509,Ouled Zmam,MA-05-255,0,commune_absente_du_geojson
+MA-05-255-0505,Ouled Bourahmoune,MA-05-255,0,commune_absente_du_geojson
+MA-05-255-0111,Souk Sebt Ouled Nemma,MA-05-255,0,commune_absente_du_geojson
