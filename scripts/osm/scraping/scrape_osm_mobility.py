@@ -53,7 +53,7 @@ CONFIG_PATH = SCRIPT_DIR / "osm_mobility_config.yaml"
 DATASETS_DIR = SCRIPT_DIR.parent.parent.parent / "datasets" / "osm"
 RAW_DIR = DATASETS_DIR / "raw"
 CACHE_DIR = RAW_DIR / "overpass_cache_mobility"
-COMMUNES_GEOJSON = DATASETS_DIR / "admin_boundaries_communes.geojson"
+COMMUNES_BOUNDARIES = DATASETS_DIR / "admin_boundaries_communes.csv"
 
 MOBILITY_COLUMNS = [
     "element_category", "osm_id", "osm_type", "code_province", "commune_code",
@@ -164,8 +164,8 @@ def main() -> int:
 
     ref_path = (SCRIPT_DIR / cfg["communes_reference"]).resolve()
     provinces, communes = load_geo_reference(ref_path)
-    communes_geom = load_communes_geometry(COMMUNES_GEOJSON)
-    province_polygons, communes_by_province = build_province_polygons(provinces, communes, communes_geom)
+    boundary_polygons = load_communes_geometry(COMMUNES_BOUNDARIES)
+    province_polygons, communes_by_province = build_province_polygons(provinces, communes, boundary_polygons)
 
     if args.province_code:
         provinces = [p for p in provinces if p["code_province"] == args.province_code]

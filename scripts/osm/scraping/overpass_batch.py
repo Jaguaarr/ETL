@@ -25,8 +25,21 @@ Resolution province -> `area` OSM : essai par nom (+ repli sur quelques
 admin_level, les provinces marocaines n'etant pas toutes taguees au meme
 niveau cote OSM). Si aucune resolution ne matche, repli automatique sur un
 filtre `poly:` construit a partir de l'union des polygones communaux de
-cette province (deja disponibles localement, cf. admin_boundaries_communes.geojson)
+cette province (deja disponibles localement, cf. admin_boundaries_communes.csv)
 -- jamais de requete par commune, meme dans ce cas degrade.
+
+Resolution commune HCP <-> polygone : PAR GEOMETRIE, jamais par nom.
+Le fichier de limites administratives (admin_boundaries_communes.csv,
+produit par scrape_admin_boundaries.py) ne porte aucune cle commune avec
+geo_reference.csv (source HCP) -- ses noms sont ceux de la source
+GADM/OSM d'origine, avec les memes ecarts orthographiques qui rendaient le
+matching par nom peu fiable ("Chefchaouen" vs "Chefchaouene", tirets,
+accents...). On utilise a la place le centroide de chaque commune HCP
+(colonnes centroid_lat/centroid_lon de geo_reference.csv, deja calcule et
+fiable) : le polygone qui CONTIENT ce centroide est le polygone de cette
+commune. Deterministe, insensible a l'orthographe, un seul echec possible
+(centroide hors de tout polygone -- journalise, jamais un choix au
+hasard). Cf. match_communes_to_polygons().
 """
 
 from __future__ import annotations
@@ -34,12 +47,19 @@ from __future__ import annotations
 import csv
 import json
 import sys
-import unicodedata
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
-from shapely.geometry import MultiPolygon, Polygon, shape
+from shapely.geometry import MultiPolygon, Point, Polygon, shape
 from shapely.ops import unary_union
+
+# admin_boundaries_communes.csv porte des polygones GADM parfois tres
+# detailles (colonne geojson_geom) : la limite par defaut du module csv
+# (131072 caracteres/champ) est depassee, provoquant un crash immediat au
+# chargement (_csv.Error: field larger than field limit) avant meme la
+# 1ere requete Overpass -- verifie en direct sur ce jeu de donnees.
+csv.field_size_limit(2**31 - 1)
+from shapely.strtree import STRtree
 
 from osm_overpass import query_overpass
 
@@ -69,50 +89,114 @@ def load_geo_reference(ref_path: Path) -> tuple[list[dict], list[dict]]:
     return provinces, communes
 
 
-def normalize_name(name: str) -> str:
-    """Normalise un nom pour le matching : minuscules, sans accents, sans tirets."""
-    name = (name or "").strip().lower()
-    name = unicodedata.normalize("NFKD", name).encode("ASCII", "ignore").decode("ascii")
-    name = name.replace("-", " ")
-    return " ".join(name.split())
+def load_communes_geometry(communes_boundaries_path: Path) -> list[dict]:
+    """Charge les polygones de limites administratives communales depuis
+    admin_boundaries_communes.csv (produit par scrape_admin_boundaries.py --
+    colonnes osm_id, name, name_ar, admin_level, level_label, ref,
+    geojson_geom ; la geometrie est stockee en JSON dans geojson_geom).
+
+    Retourne une liste de polygones BRUTS, SANS cle de jointure vers les
+    communes HCP (name/osm_id/ref ne sont pas des codes communes HCP -- ce
+    sont des identifiants de la source d'origine des polygones). La
+    jointure avec geo_reference.csv se fait par geometrie, cf.
+    match_communes_to_polygons()."""
+    if not communes_boundaries_path.exists():
+        print(f"[ERROR] limites communales introuvables : {communes_boundaries_path}", file=sys.stderr)
+        sys.exit(1)
+
+    boundaries = []
+    with open(communes_boundaries_path, newline="", encoding="utf-8") as f:
+        for row in csv.DictReader(f):
+            geom_raw = row.get("geojson_geom")
+            if not geom_raw:
+                continue
+            try:
+                geometry = shape(json.loads(geom_raw))
+            except (ValueError, json.JSONDecodeError):
+                continue
+            if geometry.is_empty:
+                continue
+            boundaries.append({
+                "osm_id": row.get("osm_id"),
+                "name": row.get("name"),
+                "polygon": geometry,
+            })
+    return boundaries
 
 
-def load_communes_geometry(communes_geojson_path: Path) -> dict[str, object]:
-    """Charge les polygones des communes depuis le GeoJSON (NAME_4 -> geometry).
-    Meme source/format que l'ancienne implementation commune-par-commune."""
-    with open(communes_geojson_path, encoding="utf-8") as f:
-        geo = json.load(f)
-    geometries = {}
-    for feat in geo["features"]:
-        name = normalize_name(feat["properties"]["NAME_4"])
-        geometries[name] = shape(feat["geometry"])
-    return geometries
+# Au-dela de cette distance (degres, ~ lat/lon WGS84) entre le centroide
+# HCP et le polygone le plus proche, on considere qu'il n'y a pas de match
+# fiable (ce n'est plus un ecart d'imprecision de centroide/bord de
+# polygone mais un vrai defaut de couverture -- commune absente du fichier
+# de limites, par exemple) : mieux vaut journaliser l'echec que rattacher
+# au hasard. ~0.05 degre ~= 5 km a la latitude du Maroc.
+NEAREST_FALLBACK_MAX_DEGREES = 0.05
 
 
-def find_commune_polygon(normalized_name: str, communes_geom: dict[str, object]) -> object | None:
-    """Match exact d'abord, puis repli par prefixe (dans les deux sens) --
-    verifie en direct : "Chefchaouen" (geo_reference.csv, source HCP) vs
-    "Chefchaouene" (admin_boundaries_communes.geojson, variante
-    orthographique) ne matchent pas en exact, alors que c'est la MEME
-    commune (et, concretement, celle qui concentre l'essentiel des POI de
-    sa province -- un match manque ici degrade fortement la couverture,
-    pas juste quelques POI en bordure). Un match par prefixe unique reste
-    fiable ; en cas d'ambiguite (plusieurs candidats), aucun choix au
-    hasard -- retourne None comme un echec normal de correspondance."""
-    exact = communes_geom.get(normalized_name)
-    if exact is not None:
-        return exact
-    candidates = [
-        (name, poly) for name, poly in communes_geom.items()
-        if name.startswith(normalized_name) or normalized_name.startswith(name)
-    ]
-    if len(candidates) == 1:
-        return candidates[0][1]
-    return None
+def match_communes_to_polygons(
+    communes: list[dict], boundary_polygons: list[dict]
+) -> tuple[dict[str, object], list[dict]]:
+    """Associe a chaque commune HCP (geo_reference.csv) son polygone, PAR
+    GEOMETRIE : le polygone qui contient le centroide HCP
+    (centroid_lat/centroid_lon) est celui de cette commune. Aucun nom
+    n'intervient dans ce matching -- insensible aux variantes
+    orthographiques/accents qui rendaient le matching par nom peu fiable.
+
+    Repli : si aucun polygone ne contient exactement le centroide (bord
+    imprecis), on prend le polygone le plus proche s'il est a moins de
+    NEAREST_FALLBACK_MAX_DEGREES, sinon aucun match (journalise, jamais un
+    choix au hasard).
+
+    Retourne (code_commune -> polygone, liste des communes non matchees
+    pour investigation)."""
+    polys = [b["polygon"] for b in boundary_polygons]
+    matched: dict[str, object] = {}
+    unmatched: list[dict] = []
+
+    if not polys:
+        return matched, list(communes)
+
+    tree = STRtree(polys)
+
+    for commune in communes:
+        try:
+            lat = float(commune["centroid_lat"])
+            lon = float(commune["centroid_lon"])
+        except (TypeError, ValueError, KeyError):
+            unmatched.append(commune)
+            continue
+
+        point = Point(lon, lat)
+
+        # STRtree.query filtre d'abord par boite englobante (rapide) ;
+        # le containment exact est verifie ensuite, seulement sur les
+        # quelques candidats retournes.
+        candidate_indices = tree.query(point)
+        polygon = None
+        for idx in candidate_indices:
+            candidate = polys[int(idx)]
+            if candidate.contains(point):
+                polygon = candidate
+                break
+
+        if polygon is None:
+            nearest_idx = tree.nearest(point)
+            if nearest_idx is not None:
+                nearest_poly = polys[int(nearest_idx)]
+                if point.distance(nearest_poly) <= NEAREST_FALLBACK_MAX_DEGREES:
+                    polygon = nearest_poly
+
+        if polygon is None:
+            unmatched.append(commune)
+            continue
+
+        matched[commune["code_commune"]] = polygon
+
+    return matched, unmatched
 
 
 def build_province_polygons(
-    provinces: list[dict], communes: list[dict], communes_geom: dict[str, object]
+    provinces: list[dict], communes: list[dict], boundary_polygons: list[dict]
 ) -> tuple[dict[str, object], dict[str, list[dict]]]:
     """Calcule le polygone de repli de chaque province par UNION de ses
     communes membres (pas un fichier province.geojson separe, potentiellement
@@ -122,13 +206,27 @@ def build_province_polygons(
     sur le decoupage 2015 a 12 regions/75 provinces. Unioner les communes
     (deja sur le decoupage canonique) evite ce desalignement entierement).
 
+    La resolution commune -> polygone se fait par geometrie (centroide HCP
+    contenu dans le polygone, cf. match_communes_to_polygons), jamais par
+    nom.
+
     Retourne (province_code -> polygone union, province_code -> communes
     membres avec leur polygone individuel deja resolu)."""
+    matched, unmatched = match_communes_to_polygons(communes, boundary_polygons)
+
+    if unmatched:
+        print(
+            f"[WARN] {len(unmatched)}/{len(communes)} commune(s) HCP sans polygone "
+            f"(centroide hors de tout polygone connu, meme en repli le plus proche) : "
+            + ", ".join(c["code_commune"] for c in unmatched[:20])
+            + (" ..." if len(unmatched) > 20 else ""),
+            file=sys.stderr,
+        )
+
     communes_by_province: dict[str, list[dict]] = {}
     for commune in communes:
         code_province = commune["code_province"]
-        normalized = normalize_name(commune["nom"])
-        polygon = find_commune_polygon(normalized, communes_geom)
+        polygon = matched.get(commune["code_commune"])
         communes_by_province.setdefault(code_province, []).append(
             {**commune, "polygon": polygon}
         )
@@ -378,7 +476,6 @@ def assign_to_commune(lat: float, lon: float, province_communes: list[dict]) -> 
     cette province contient ce point ? None si aucune (bord de polygone
     imprecis, ou commune sans polygone connu -- journalise en amont plutot
     que rattache au hasard)."""
-    from shapely.geometry import Point
 
     point = Point(lon, lat)
     for commune in province_communes:
